@@ -14,6 +14,11 @@ const errorHandler = (response, e) => {
             success: false,
             message: "Wrong authorization"
         })
+    } else if (e?.message?.includes("no_user")){
+        return response.json({
+            success: false,
+            message: "Users not found"
+        })
     } else if (e?.message?.includes("jwt malform")){
         return response.json({
             success: false,
