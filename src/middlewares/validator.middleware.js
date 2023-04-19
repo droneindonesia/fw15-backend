@@ -3,7 +3,7 @@ const usersModel = require("../models/admin/users.model")
 const fileRemover = require("../helpers/fileremover.helper")
 
 const emailFormat = body("email").isEmail().withMessage("Email is invalid")
-const checkPassword =  body("password").isLength({min: 1}).withMessage("Password is invalid")
+const checkPassword =  body("password").isLength({min: 1}).isStrongPassword().withMessage("Password is invalid")
 const checkDuplicateEmail = body("email").custom(async value => {
     const email = await usersModel.findOneByEmail(value)
     if(email){
