@@ -214,8 +214,8 @@ const rules = {
         checkDuplicatePass
     ],
     getAll: [
-        query("page").isInt().withMessage("Page should be a number"),
-        query("limit").isInt().withMessage("Limit should be a number"),
+        query("page").isInt().withMessage("Page should be a number").optional({values : "undefined" | "null" | "falsy"}),
+        query("limit").isInt().withMessage("Limit should be a number").optional(),
         query("sortBy").isIn(["ASC", "DESC"]).withMessage("Input is invalid").optional()
     ],  
     getOne: [
