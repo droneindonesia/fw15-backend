@@ -19,6 +19,11 @@ const errorHandler = (response, e) => {
             success: false,
             message: "Users not found"
         })
+    } else if (e?.message?.includes("no_forgot_request")){
+        return response.json({
+            success: false,
+            message: "Error, email not found"
+        })
     } else if (e?.message?.includes("jwt malform")){
         return response.json({
             success: false,
