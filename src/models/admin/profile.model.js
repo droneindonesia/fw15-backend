@@ -43,7 +43,7 @@ exports.findOneByUserId = async function(userId){
     "p"."createdAt",
     "p"."updatedAt"
     FROM "profile" "p"
-    JOIN "users" "u" ON u."id" = "p"."userId"
+    JOIN "users" "u" ON "u"."id" = "p"."userId"
     WHERE "p"."userId"=$1
     `
 

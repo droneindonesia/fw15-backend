@@ -4,10 +4,10 @@ const errorHandler = require("../helpers/errorHandler.helper")
 
 exports.updateProfile = async (req, res) => {
     try {
-        const {id} = req.user
+        const { id } = req.user
         const user = await profileModel.findOneByUserId(id)
         const data = {
-            ...req.body
+            ...req.body,
         }
         if(req.file){
             if(user.picture){
