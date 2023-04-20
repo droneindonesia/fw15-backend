@@ -30,7 +30,7 @@ exports.login = async (request, response) => {
 
 exports.register = async (request, response) => {
     try {
-        const {username, password, confirmPassword} = request.body
+        const {fullName, password, confirmPassword} = request.body
         if (password !== confirmPassword){
             throw Error ("password_unmatch")
         }
@@ -41,7 +41,7 @@ exports.register = async (request, response) => {
         }
         const user = await usersModel.insert(data)
         const profileData = {
-            username,
+            fullName,
             userId: user.id
         }
         await profileModel.insert(profileData)
