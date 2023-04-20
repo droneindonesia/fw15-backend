@@ -1,6 +1,5 @@
 const profileModel = require("../../models/admin/profile.model")
 const errorHandler = require("../../helpers/errorHandler.helper")
-const argon = require("argon2")
 
 exports.getAllProfile = async (request, response) => {
     try {
@@ -40,15 +39,10 @@ exports.getOneProfile = async (request, response) => {
 
 exports.createProfile = async (request, response) => {
     try {
-        const hash = await argon.hash(request.body.password)
-        const data = {
-            ...request.body,
-            password: hash
-        }
         if(request.file){
-            data.picture = request.file.filename
+            request.body.picture = request.file.filename
         }
-        const profile = await profileModel.insert(data)
+        const profile = await profileModel.insert(request.body)
         return response.json({
             success: true,
             message: `Created profile ${request.body.email} successfully`,

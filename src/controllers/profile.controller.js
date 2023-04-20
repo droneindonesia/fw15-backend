@@ -3,28 +3,30 @@ const profileModel = require("../models/admin/profile.model")
 const errorHandler = require("../helpers/errorHandler.helper")
 
 exports.updateProfile = async (req, res) => {
-    const {id} = req.user
-    const user = await profileModel.findOneByUserId(id)
-    const data = {
-        ...req.body
-    }
-    if(req.file){
-        if(user.picture){
-            fileRemover({filename: user.picture})
+    try {
+        const {id} = req.user
+        const user = await profileModel.findOneByUserId(id)
+        const data = {
+            ...req.body
         }
+        if(req.file){
+            if(user.picture){
+                fileRemover({filename: user.picture})
+            }
+            data.picture =  req.file.filename
+        }
+        const profile = await profileModel.updatebyUserId(id, data)
+        if(!profile){
+            throw Error ("Update profile failed")
+        }
+        return res.json({
+            success: true,
+            message: "Profile updated",
+            result: profile
+        }) 
+    } catch (e) {
+        return errorHandler(res, e)
     }
-    if(req.file){
-        data.picture =  req.file.filename
-    }
-    const profile = await profileModel.updatebyUserId(id, req.body)
-    if(!profile){
-        throw Error ("Update profile failed")
-    }
-    return res.json({
-        success: true,
-        message: "Profile updated",
-        result: profile
-    }) 
 }
 
 exports.getProfile = async (req, res) => {

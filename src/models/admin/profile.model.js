@@ -54,11 +54,11 @@ exports.findOneByUserId = async function(userId){
 
 exports.insert = async function(data){
     const query = `
-    INSERT INTO "profile" ("picture", "fullName", "phoneNumber", "gender", "profession", "nationality", "birthDate") 
-    VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
+    INSERT INTO "profile" ("userId", "picture", "fullName", "phoneNumber", "gender", "profession", "nationality", "birthDate") 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
     `
 
-    const values = [data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthDate]
+    const values = [data.userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthDate]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
@@ -66,38 +66,39 @@ exports.insert = async function(data){
 exports.update = async function(id, data){
     const query = `
     UPDATE "profile" 
-    SET "picture"=COALESCE(NULLIF($2, ''), "picture"), 
-    "fullName"=COALESCE(NULLIF($3, ''), "fullName"),
-    "phoneNumber"=COALESCE(NULLIF($4, ''), "phoneNumber"),
-    "gender"=COALESCE(NULLIF($5::BOOLEAN, NULL) "gender"),
-    "profession"=COALESCE(NULLIF($6, ''), "profession"),
-    "nationality"=COALESCE(NULLIF($7, ''), "nationality"),
-    "birthdate"=COALESCE(NULLIF($8::DATE, NULL), "birthdate"),
-    "userId"=COALESCE(NULLIF($9::INTEGER, NULL), "userId")
+    SET 
+    "userId"=COALESCE(NULLIF($2::INTEGER, NULL), "userId"),
+    "picture"=COALESCE(NULLIF($3, ''), "picture"), 
+    "fullName"=COALESCE(NULLIF($4, ''), "fullName"),
+    "phoneNumber"=COALESCE(NULLIF($5, ''), "phoneNumber"),
+    "gender"=COALESCE(NULLIF($6::BOOLEAN, NULL) "gender"),
+    "profession"=COALESCE(NULLIF($7, ''), "profession"),
+    "nationality"=COALESCE(NULLIF($8, ''), "nationality"),
+    "birthDate"=COALESCE(NULLIF($9::DATE, NULL), "birthDate")
     WHERE "id" = $1
     RETURNING *
     `
 
-    const values = [id, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthdate]
+    const values = [id, data.userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthDate]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
 
 exports.updatebyUserId = async function(userId, data){
     const query = `
-  UPDATE "profile" 
-  SET "picture"=COALESCE(NULLIF($2, ''), "picture"), 
-  "fullName"=COALESCE(NULLIF($3, ''), "fullName"),
-  "phoneNumber"=COALESCE(NULLIF($4, ''), "phoneNumber"),
-  "gender"=COALESCE(NULLIF($5::BOOLEAN, NULL), "gender"),
-  "profession"=COALESCE(NULLIF($6, ''), "profession"),
-  "nationality"=COALESCE(NULLIF($7, ''), "nationality"),
-  "birthDate"=COALESCE(NULLIF($8::DATE, NULL), "birthDate")
-  WHERE "userId" = $1
-  RETURNING *
-  `
+    UPDATE "profile" 
+    SET "picture"=COALESCE(NULLIF($2, ''), "picture"), 
+    "fullName"=COALESCE(NULLIF($3, ''), "fullName"),
+    "phoneNumber"=COALESCE(NULLIF($4, ''), "phoneNumber"),
+    "gender"=COALESCE(NULLIF($5::BOOLEAN, NULL), "gender"),
+    "profession"=COALESCE(NULLIF($6, ''), "profession"),
+    "nationality"=COALESCE(NULLIF($7, ''), "nationality"),
+    "birthDate"=COALESCE(NULLIF($8::DATE, NULL), "birthDate")
+    WHERE "userId"=$1
+    RETURNING *
+    `
 
-    const values = [userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthdate]
+    const values = [userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthDate]
     const {rows} = await db.query(query, values)
     return rows[0]
 }
