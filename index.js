@@ -12,4 +12,3 @@ app.use("/", require("./src/routers/index"))
 app.listen(PORT, () => {
     console.log(`App is listening on ${PORT}`)
 })
- 

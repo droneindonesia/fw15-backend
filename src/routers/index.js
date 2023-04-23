@@ -5,6 +5,7 @@ router.use("/auth", require("./auth/auth.router"))
 router.use("/admin", authMiddleware, require("./admin/admin.router"))
 router.use("/profile", authMiddleware, require("./profile.router"))
 router.use("/events", require("./events.router"))
+router.use("/categories", require("./categories.router"))
 
 router.get("/", (request, response) => {
     return response.json({
