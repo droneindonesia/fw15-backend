@@ -1,4 +1,6 @@
 const eventsRouter = require("express").Router
 const eventsController = require("../controllers/events.controller")
 
-eventsRouter.length("/", eventsController.getAllEvents)
+eventsRouter.get("/", eventsController.getAllEvents)
+eventsRouter.get("/:id", eventsController.getEventsById)
+eventsRouter.post("/manage", eventsController.addEvents)

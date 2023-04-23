@@ -19,3 +19,30 @@ exports.getAllEvents = async (req, res) => {
         return errorHandler(res, err)
     }
 }
+
+exports.getEventsById = async (req, res) => {
+    try {
+        let data = await eventsModel.findOne(req.params.id)
+        return res.json({
+            success: true,
+            message: "Get one events successfully",
+            results: data
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
+
+
+exports.addEvents = async (req, res) => {
+    try {
+        let data = await eventsModel.insert(req.body)
+        return res.json({
+            success: true,
+            message: "Created events successfully",
+            results: data
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
