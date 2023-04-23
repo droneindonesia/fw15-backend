@@ -46,3 +46,16 @@ exports.addEvents = async (req, res) => {
         return errorHandler(res, err)
     }
 }
+
+exports.updateEvents = async (req, res) => {
+    try {
+        let data = await eventsModel.update(req.params.id, req.body)
+        return res.json({
+            success: true,
+            message: `Update events ${req.params.id} successfully`,
+            results: data
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
