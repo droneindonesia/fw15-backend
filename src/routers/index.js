@@ -7,6 +7,7 @@ router.use("/profile", authMiddleware, require("./profile.router"))
 router.use("/events", require("./events.router"))
 router.use("/categories", require("./categories.router"))
 router.use("/partners", require("./partners.router"))
+router.use("/reservations", require("./reservations.router"))
 
 router.get("/", (request, response) => {
     return response.json({

@@ -1,7 +1,9 @@
-const eventsRouter = require("express").Router
+const eventsRouter = require("express").Router()
 const eventsController = require("../controllers/events.controller")
 
 eventsRouter.get("/", eventsController.getAllEvents)
 eventsRouter.get("/:id", eventsController.getEventsById)
 eventsRouter.post("/manage", eventsController.addEvents)
 eventsRouter.patch("/manage", eventsController.updateEvents)
+
+module.exports = eventsRouter
