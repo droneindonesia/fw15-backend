@@ -1,9 +1,9 @@
-const reservationsModel = require("../models/admin/reservations.model")
+const reservationsTicketModel = require("../models/admin/reservationsticket.model")
 const errorHandler = require("../helpers/errorHandler.helper")
 
 exports.createReservations = async (req, res) => {
     try {
-        let data = await reservationsModel(req.body)
+        let data = await reservationsTicketModel.insert(req.body)
         return res.json({
             success: true,
             message: "Create reservation successfully",
