@@ -31,7 +31,8 @@ exports.updateProfile = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
     try {
-        const {id} = req.user
+        const { id } = req.user
+        console.log(req.user)
         const profile = await profileModel.findOneByUserId(id)
         if(!profile){
             throw Error("profile_not_found")

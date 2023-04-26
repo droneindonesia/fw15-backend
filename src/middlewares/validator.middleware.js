@@ -213,6 +213,19 @@ const rules = {
             .withMessage("Password invalid"),
         checkDuplicatePass
     ],
+    changePassword: [
+        body("oldPassword")
+            .optional()
+            .isStrongPassword()
+            .withMessage("Password is invalid"),
+        body("newPassword")
+            .optional()
+            .isStrongPassword()
+            .withMessage("Password invalid"),
+        body("confirmPassword").custom((value, {req}) => {
+            return value === req.body.newPassword
+        })
+    ],
     getAll: [
         query("page").isInt().withMessage("Page should be a number").optional({values : "undefined" | "null" | "falsy"}),
         query("limit").isInt().withMessage("Limit should be a number").optional(),
