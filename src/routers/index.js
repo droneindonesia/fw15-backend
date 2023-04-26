@@ -10,6 +10,7 @@ router.use("/partners", require("./partners.router"))
 router.use("/reservations", require("./reservations.router"))
 router.use("/payment", require("./payment.router"))
 router.use("/changepassword", authMiddleware, require("./changepassword.router"))
+router.use("/wishlist", require("./wishlist.router.js"))
 
 router.get("/", (request, response) => {
     return response.json({
