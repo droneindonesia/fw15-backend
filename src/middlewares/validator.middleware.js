@@ -166,10 +166,18 @@ const rules = {
             .withMessage("id should be a number")
     ],
     reservationsticket: [
-        body("name")
+        body("reservationId")
             .optional()
-            .isString()
-            .withMessage("Name should be a string")
+            .isInt()
+            .withMessage("Reservation ID should be a number"),
+        body("sectionId")
+            .optional()
+            .isInt()
+            .withMessage("Section Id should be a number"),
+        body("quantity")
+            .optional()
+            .isInt()
+            .withMessage("Quantity should be a number")
     ],
     users : [
         body("email")
