@@ -24,7 +24,7 @@
 									"urlencoded": []
 								},
 								"url": {
-									"raw": "{{url}}/admin/categories?page=1&limit=3&search&sort=&sortBy=ASC",
+									"raw": "{{url}}/admin/categories",
 									"host": [
 										"{{url}}"
 									],
@@ -35,23 +35,28 @@
 									"query": [
 										{
 											"key": "page",
-											"value": "1"
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "limit",
-											"value": "3"
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": "ASC"
+											"value": "ASC",
+											"disabled": true
 										}
 									]
 								}
@@ -76,7 +81,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": ""
 										}
 									]
 								}
@@ -172,7 +177,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/cities?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/cities",
 									"host": [
 										"{{url}}"
 									],
@@ -183,23 +188,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -360,7 +370,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/profile?limit=&search=&sortBy=&sort=&page",
+									"raw": "{{url}}/admin/profile",
 									"host": [
 										"{{url}}"
 									],
@@ -371,23 +381,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -395,7 +410,7 @@
 							"response": []
 						},
 						{
-							"name": "GET DETAIL PROFILE",
+							"name": "GET ONE PROFILE",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -428,28 +443,18 @@
 									"mode": "formdata",
 									"formdata": [
 										{
-											"key": "fullName",
-											"value": "itmamulfahmi10",
-											"type": "default"
-										},
-										{
-											"key": "email",
-											"value": "tests1@gmail.com",
-											"type": "default"
-										},
-										{
-											"key": "password",
-											"value": "MiseryBeats1234#",
-											"type": "default"
-										},
-										{
 											"key": "picture",
 											"type": "file",
 											"src": "/C:/Users/itmam/Downloads/movie-1.jpg"
 										},
 										{
+											"key": "fullName",
+											"value": "itmamulfahmi",
+											"type": "default"
+										},
+										{
 											"key": "phoneNumber",
-											"value": "12345",
+											"value": "+628976810795",
 											"type": "default"
 										},
 										{
@@ -470,6 +475,11 @@
 										{
 											"key": "birthDate",
 											"value": "2008-11-11",
+											"type": "default"
+										},
+										{
+											"key": "userId",
+											"value": "1",
 											"type": "default"
 										}
 									]
@@ -545,7 +555,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": ""
+											"value": "9"
 										}
 									]
 								}
@@ -563,7 +573,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/eventcategories?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/eventcategories",
 									"host": [
 										"{{url}}"
 									],
@@ -574,23 +584,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -731,7 +746,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/events?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/events",
 									"host": [
 										"{{url}}"
 									],
@@ -742,23 +757,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -929,7 +949,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/partners?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/partners",
 									"host": [
 										"{{url}}"
 									],
@@ -940,23 +960,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -1097,7 +1122,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/paymentmethod?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/paymentmethod",
 									"host": [
 										"{{url}}"
 									],
@@ -1108,23 +1133,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -1255,7 +1285,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/reservationsection?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/reservationsection",
 									"host": [
 										"{{url}}"
 									],
@@ -1266,23 +1296,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -1581,7 +1616,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/reservations?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/reservations",
 									"host": [
 										"{{url}}"
 									],
@@ -1592,23 +1627,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -1769,7 +1809,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/reservationsticket?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/reservationsticket",
 									"host": [
 										"{{url}}"
 									],
@@ -1780,23 +1820,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -1947,7 +1992,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/wishlists?page&limit&search&sortBy&sort",
+									"raw": "{{url}}/admin/wishlists",
 									"host": [
 										"{{url}}"
 									],
@@ -1958,23 +2003,28 @@
 									"query": [
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -2138,7 +2188,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/admin/users?limit=&search=&sortBy=&sort=&page=",
+									"raw": "{{url}}/admin/users",
 									"host": [
 										"{{url}}"
 									],
@@ -2149,23 +2199,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": ""
+											"value": "",
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": ""
+											"value": "",
+											"disabled": true
 										}
 									]
 								}
@@ -2207,12 +2262,12 @@
 									"urlencoded": [
 										{
 											"key": "username",
-											"value": "fahmi5",
+											"value": "itmamulfahmi1",
 											"type": "default"
 										},
 										{
 											"key": "email",
-											"value": "miserybeats20@gmail.com",
+											"value": "itmamul2005@gmail.com",
 											"type": "default"
 										},
 										{
@@ -2298,7 +2353,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": ""
+											"value": "28"
 										}
 									]
 								}
@@ -2322,12 +2377,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "itmamul2004@gmail.com",
+									"value": "itmamulfahmi@gmail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "1234567",
+									"value": "MiseryBeats1234!",
 									"type": "default"
 								}
 							]
@@ -2354,13 +2409,13 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "username",
-									"value": "itmamulfahmi",
+									"key": "fullName",
+									"value": "fahmiitmamul",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "itmamul2004@gmail.com",
+									"value": "itmamulfahmi@gmail.com",
 									"type": "default"
 								},
 								{
@@ -2398,7 +2453,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "itmamul2004@gmail.com",
+									"value": "itmamulfahmi@gmail.com",
 									"type": "default"
 								}
 							]
@@ -2426,22 +2481,22 @@
 							"urlencoded": [
 								{
 									"key": "code",
-									"value": "959000",
+									"value": "769470",
 									"type": "default"
 								},
 								{
 									"key": "email",
-									"value": "itmamul2004@gmail.com",
+									"value": "itmamulfahmi@gmail.com",
 									"type": "default"
 								},
 								{
 									"key": "password",
-									"value": "1234567",
+									"value": "MiseryBeats1234#",
 									"type": "default"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "1234567",
+									"value": "MiseryBeats1234#",
 									"type": "default"
 								}
 							]
@@ -2477,13 +2532,13 @@
 									"formdata": [
 										{
 											"key": "fullName",
-											"value": "",
+											"value": "itmamulfahmi",
 											"type": "default"
 										},
 										{
 											"key": "picture",
 											"type": "file",
-											"src": []
+											"src": "/C:/Users/itmam/Downloads/movie-1.jpg"
 										}
 									]
 								},
@@ -2494,6 +2549,303 @@
 									],
 									"path": [
 										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET PROFILE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CHANGE PASSWORD",
+					"item": [
+						{
+							"name": "CHANGE PASSWORD",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "oldPassword",
+											"value": "MiseryBeats1234#",
+											"type": "default"
+										},
+										{
+											"key": "newPassword",
+											"value": "MiseryBeats1234!",
+											"type": "default"
+										},
+										{
+											"key": "confirmPassword",
+											"value": "MiseryBeats1234!",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/changepassword",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"changepassword"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CATEGORIES",
+					"item": [
+						{
+							"name": "GET ALL CATEGORIES",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CITY",
+					"item": [
+						{
+							"name": "GET ALL CITIES",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/city",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"city"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "EVENTS",
+					"item": [
+						{
+							"name": "GET ALL EVENTS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE EVENTS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE EVENTS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/manage",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										"manage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE EVENTS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/events/manage",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"events",
+										"manage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PARTNERS",
+					"item": [
+						{
+							"name": "GET ALL PARTNERS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/partners",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"partners"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PAYMENT",
+					"item": [
+						{
+							"name": "CREATE PAYMENTS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/payment",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payment"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "RESERVATIONS",
+					"item": [
+						{
+							"name": "CREATE RESERVATIONS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/reservations",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WISHLIST",
+					"item": [
+						{
+							"name": "GET ALL WISHLIST",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/wishlist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wishlist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET ONE WISHLIST",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/wishlist/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wishlist",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
 									]
 								}
 							},
