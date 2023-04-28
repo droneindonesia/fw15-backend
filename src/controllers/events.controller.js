@@ -22,7 +22,8 @@ exports.getAllEvents = async (req, res) => {
 
 exports.getEventsById = async (req, res) => {
     try {
-        let data = await eventsModel.findOne(req.params.id)
+        let {id} = req.user
+        let data = await eventsModel.findOne(id)
         return res.json({
             success: true,
             message: "Get one events successfully",
@@ -49,7 +50,8 @@ exports.addEvents = async (req, res) => {
 
 exports.updateEvents = async (req, res) => {
     try {
-        let data = await eventsModel.update(req.params.id, req.body)
+        let {id} = req.user
+        let data = await eventsModel.update(id, req.body)
         return res.json({
             success: true,
             message: `Update events ${req.params.id} successfully`,

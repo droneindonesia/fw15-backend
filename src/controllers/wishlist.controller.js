@@ -3,10 +3,11 @@ const wishlistModel = require("../models/admin/wishlist.model")
 
 exports.getWishlist = async (req, res) => {
     try {
-        let data = await wishlistModel.findOne(req.params.id)
+        let {id} = req.user
+        let data = await wishlistModel.findOne(id)
         return res.json({
             success: true,
-            message: "Get all wishlist successfully",
+            message: "Get wishlist successfully",
             results: data
         })
     } catch (err) {
