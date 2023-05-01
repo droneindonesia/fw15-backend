@@ -1,14 +1,25 @@
 const multer = require("multer")
+const cloudinary = require("cloudinary").v2
+const { CloudinaryStorage } = require("multer-storage-cloudinary")
+const path = require("path")
+const {CLOUD_NAME, API_KEY, API_SECRET} = process.env
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "tmp/")
-    },
-    filename: (req, file, cb) => {
-        const explode = file.originalname.split(".").length
-        const ext = file.originalname.split(".")[explode - 1]
-        const filename = new Date().getTime().toString() + "." + ext
-        cb(null, filename)
+cloudinary.config({
+    cloud_name: CLOUD_NAME,
+    api_key: API_KEY,
+    api_secret: API_SECRET,
+})
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "UPLOADS",
+        format: async (file) => path.extname(file.originalname).slice("1"),
+        public_id: () => {
+            const randomNumber = Math.round(Math.random() * 90000)
+            const name = `${new Date().getDate()}_${randomNumber}`
+            return name
+        },
     }
 })
 
