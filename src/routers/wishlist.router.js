@@ -3,6 +3,6 @@ const wishlistController = require("../controllers/wishlist.controller")
 const validate = require("../middlewares/validator.middleware")
 
 wishlistRouter.get("/", validate("getOne"), wishlistController.getWishlist)
-wishlistRouter.get("/", wishlistController.getAllWishlist)
+wishlistRouter.get("/", validate("getAll"), wishlistController.getAllWishlist)
 
 module.exports = wishlistRouter

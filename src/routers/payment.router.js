@@ -1,6 +1,7 @@
 const paymentRouter = require("express").Router()
 const paymentsController = require("../controllers/payment.controller")
+const validate = require("../middlewares/validator.middleware")
 
-paymentRouter.post("/", paymentsController.createPayments)
+paymentRouter.post("/", validate("paymentmethod"), paymentsController.createPayments)
 
 module.exports = paymentRouter
