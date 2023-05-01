@@ -27,6 +27,34 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
+exports.findAllByUserId = async (userId) => {
+    const query = `
+    SELECT 
+    "events"."id" as "eventId",
+    "users"."id" as "userId",
+    "events"."title",
+    "events"."date",
+    "events"."cityId",
+    "events"."descriptions",
+    "events"."createdBy",
+    "reservationStatus"."id" as "statusId",
+    "reservationStatus"."name" as "statusName",
+    "paymentMethods"."id" as "paymentMethodId",
+    "paymentMethods"."name" as "paymentMethodName",
+    "reservations"."createdAt",
+    "reservations"."updatedAt"
+    FROM "reservations" 
+    JOIN "events" ON "events"."id" = "reservations"."eventId"
+    JOIN "users" ON "users"."id" = "reservations"."userId"
+    JOIN "reservationStatus" ON "reservationStatus"."id" = "reservations"."statusId"
+    JOIN "paymentMethods" ON "paymentMethods"."id" = "reservations"."paymentMethodId"
+    WHERE "reservations"."userId"=$1
+    `
+    const values = [userId]
+    const { rows } = await db.query(query, values)
+    return rows[0]
+}
+
 exports.insert = async function(data){
     const query = `
     INSERT INTO "reservations" ("eventId", "userId", "statusId", "paymentMethodId") 
@@ -48,6 +76,20 @@ exports.update = async function(id, data){
 
     const values = [id, data.eventId, data.userId, data.statusId, data.paymentMethodId]
     const {rows} = await db.query(query, values)
+    return rows[0]
+}
+
+exports.updateByUserId = async (userId, data) => {
+    const query = `
+    UPDATE "reservations" 
+    SET 
+    "statusId"=$2,
+    "paymentMethodId"=$3
+    WHERE "userId"=$1
+    RETURNING *;
+  `
+    const values = [userId, data.statusId, data.paymentMethodId]
+    const { rows } = await db.query(query, values)
     return rows[0]
 }
 

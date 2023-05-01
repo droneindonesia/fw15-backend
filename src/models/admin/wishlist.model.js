@@ -27,6 +27,27 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
+exports.findAllByUserId = async (userId) => {
+    const query = `
+    SELECT 
+    "events"."id" as "eventId",
+    "users"."id" as "userId",
+    "events"."title",
+    "cities"."name" as "location",
+    "events"."date",
+    "wishlist"."createdAt",
+    "wishlist"."updatedAt"
+    FROM "wishlist" 
+    JOIN "events" ON "events"."id" = "wishlist"."eventId"
+    JOIN "users" ON "users"."id" = "wishlist"."userId"
+    JOIN "cities" ON "cities"."id" = "events"."cityId"
+    WHERE "wishlist"."userId"=$1
+    `
+    const values = [userId]
+    const { rows } = await db.query(query, values)
+    return rows
+}
+
 exports.insert = async function(data){
     const query = `
     INSERT INTO "wishlists" ("userId", "eventId") 
