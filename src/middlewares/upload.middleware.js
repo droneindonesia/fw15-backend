@@ -38,7 +38,8 @@ const uploadMiddleware = (field) => {
                 }
                 return res.status(400).json({
                     success: false,
-                    message: "File too large"
+                    message: "File too large",
+                    error: err
                 })
             }
             return next()
