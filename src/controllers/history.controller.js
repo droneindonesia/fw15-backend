@@ -1,4 +1,4 @@
-const reservationsModel = require("../models/reservations.model")
+const reservationsModel = require("../models/admin/reservations.model")
 const errorHandler = require("../helpers/errorHandler.helper")
 
 exports.getHistory = async (req, res) => {
