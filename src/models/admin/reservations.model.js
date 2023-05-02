@@ -35,19 +35,19 @@ exports.findAllByUserId = async (userId) => {
     "events"."title",
     "events"."date",
     "events"."cityId",
-    "events"."descriptions",
+    "events"."description",
     "events"."createdBy",
     "reservationStatus"."id" as "statusId",
     "reservationStatus"."name" as "statusName",
-    "paymentMethods"."id" as "paymentMethodId",
-    "paymentMethods"."name" as "paymentMethodName",
+    "paymentMethod"."id" as "paymentMethodId",
+    "paymentMethod"."name" as "paymentMethodName",
     "reservations"."createdAt",
     "reservations"."updatedAt"
     FROM "reservations" 
     JOIN "events" ON "events"."id" = "reservations"."eventId"
     JOIN "users" ON "users"."id" = "reservations"."userId"
     JOIN "reservationStatus" ON "reservationStatus"."id" = "reservations"."statusId"
-    JOIN "paymentMethods" ON "paymentMethods"."id" = "reservations"."paymentMethodId"
+    JOIN "paymentMethod" ON "paymentMethod"."id" = "reservations"."paymentMethodId"
     WHERE "reservations"."userId"=$1
     `
     const values = [userId]
