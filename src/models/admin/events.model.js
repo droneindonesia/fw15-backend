@@ -9,7 +9,7 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     
     const offset = (page - 1) * limit
     const query = `
-    SELECT * FROM "events" WHERE "title" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+    SELECT * FROM "events" WHERE title LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
     `
 
     const values = [limit, offset, `%${search}%`]
@@ -42,7 +42,7 @@ exports.insert = async function(data){
 exports.update = async function(id, data){
     const query = `
     UPDATE "events" 
-    SET "picture"=$2, "title"=$3 "date"=$4, "cityId"=$5, "description"=$6
+    SET "picture"=$2, "title"=$3, "date"=$4, "cityId"=$5, "description"=$6
     WHERE "id" = $1
     RETURNING *
     `
