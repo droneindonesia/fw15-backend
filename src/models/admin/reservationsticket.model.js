@@ -26,7 +26,7 @@ exports.getInfo = async(id) => {
     "rt"."quantity" AS "quantity",
     "rsta"."name" AS "reservationStatus",
     "pm"."name" AS "paymentMethod"
-    FROM "reservationTickets" "rt"
+    FROM "reservationsTickets" "rt"
     INNER JOIN "reservationSections" "rs" ON "rs"."id" = "rt"."sectionId"
     INNER JOIN "reservations" "r" ON "r"."id" = "rt"."reservationId"
     INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
