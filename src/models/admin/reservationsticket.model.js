@@ -31,7 +31,7 @@ exports.getInfo = async(id) => {
     INNER JOIN "reservations" "r" ON "r"."id" = "rt"."reservationId"
     INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
     INNER JOIN "reservationStatus" "rsta" ON "rsta"."id" = "r"."statusId"
-    INNER JOIN "paymentMethods" "pm" ON "pm"."id" = "r"."paymentMethodId"
+    INNER JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
     WHERE "r"."id" = $1
     `  
     const values = [id]
