@@ -4,7 +4,7 @@ const errorHandler = require("../helpers/errorHandler.helper")
 exports.getHistory = async (req, res) => {
     try {
         const { id } = req.user
-        const history = await reservationsModel.findAllByUserId(id)
+        const history = await reservationsModel.findOneByUserId(id)
         return res.json({
             success: true,
             message: "Detail history",

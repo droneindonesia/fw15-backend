@@ -26,7 +26,7 @@ exports.findEventsByUser = async function(id){
       "e"."title",
       "c"."name" AS "location",
       "e"."date",
-      "e"."descriptions"
+      "e"."description"
       FROM "events" "e"
       JOIN "cities" "c" ON "c"."id" = "e"."cityId"
       WHERE "e"."id" = $1
