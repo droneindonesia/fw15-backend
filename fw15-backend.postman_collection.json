@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ab11b21f-246e-441c-a1af-7997b9dae64f",
+		"_postman_id": "4b250918-9a07-4563-8549-6a333e5f9aa6",
 		"name": "fw15-backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -445,7 +445,7 @@
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/itmam/Downloads/movie-1.jpg"
+											"src": "/C:/Users/itmam/Downloads/download.jpg"
 										},
 										{
 											"key": "fullName",
@@ -1458,7 +1458,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/admin/reservationstatus?limit&search&sortBy&sort&page",
+									"raw": "{{url}}/admin/reservationstatus",
 									"host": [
 										"{{url}}"
 									],
@@ -1469,23 +1469,28 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "search",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sortBy",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "sort",
-											"value": null
+											"value": null,
+											"disabled": true
 										},
 										{
 											"key": "page",
-											"value": null
+											"value": null,
+											"disabled": true
 										}
 									]
 								}
@@ -2382,7 +2387,7 @@
 								},
 								{
 									"key": "password",
-									"value": "MiseryBeats1234!",
+									"value": "KataSandiBaru1234#",
 									"type": "default"
 								}
 							]
@@ -2410,7 +2415,7 @@
 							"urlencoded": [
 								{
 									"key": "fullName",
-									"value": "fahmiitmamul",
+									"value": "itmamulfahmi",
 									"type": "default"
 								},
 								{
@@ -2420,12 +2425,12 @@
 								},
 								{
 									"key": "password",
-									"value": "MiseryBeats1234#",
+									"value": "KataSandiBaru1234#",
 									"type": "default"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "MiseryBeats1234#",
+									"value": "KataSandiBaru1234#",
 									"type": "default"
 								}
 							]
@@ -2481,7 +2486,7 @@
 							"urlencoded": [
 								{
 									"key": "code",
-									"value": "769470",
+									"value": "592370",
 									"type": "default"
 								},
 								{
@@ -2491,12 +2496,12 @@
 								},
 								{
 									"key": "password",
-									"value": "MiseryBeats1234#",
+									"value": "Password1234#",
 									"type": "default"
 								},
 								{
 									"key": "confirmPassword",
-									"value": "MiseryBeats1234#",
+									"value": "Password1234#",
 									"type": "default"
 								}
 							]
@@ -2532,13 +2537,38 @@
 									"formdata": [
 										{
 											"key": "fullName",
-											"value": "itmamulfahmi",
+											"value": "Fahmi Itmamul",
 											"type": "default"
 										},
 										{
 											"key": "picture",
 											"type": "file",
-											"src": "/C:/Users/itmam/Downloads/movie-1.jpg"
+											"src": "/C:/Users/itmam/Downloads/f10ff70a7155e5ab666bcdd1b45b726d.jpg"
+										},
+										{
+											"key": "phoneNumber",
+											"value": "+628123456789",
+											"type": "default"
+										},
+										{
+											"key": "gender",
+											"value": "true",
+											"type": "default"
+										},
+										{
+											"key": "profession",
+											"value": "programmer",
+											"type": "default"
+										},
+										{
+											"key": "nationality",
+											"value": "indonesia",
+											"type": "default"
+										},
+										{
+											"key": "birthDate",
+											"value": "2004-05-31",
+											"type": "default"
 										}
 									]
 								},
@@ -2586,17 +2616,17 @@
 									"urlencoded": [
 										{
 											"key": "oldPassword",
-											"value": "MiseryBeats1234#",
+											"value": "Password1234#",
 											"type": "default"
 										},
 										{
 											"key": "newPassword",
-											"value": "MiseryBeats1234!",
+											"value": "KataSandiBaru1234#",
 											"type": "default"
 										},
 										{
 											"key": "confirmPassword",
-											"value": "MiseryBeats1234!",
+											"value": "KataSandiBaru1234#",
 											"type": "default"
 										}
 									]
@@ -2646,12 +2676,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/city",
+									"raw": "{{url}}/cities",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"city"
+										"cities"
 									]
 								}
 							},
@@ -2663,24 +2693,220 @@
 					"name": "EVENTS",
 					"item": [
 						{
-							"name": "GET ALL EVENTS",
+							"name": "MANAGE EVENTS",
+							"item": [
+								{
+									"name": "GET EVENTS",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/events?search=Chainsmokers&sort=id&page=2&limit=2&sortBy=DESC",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"events"
+											],
+											"query": [
+												{
+													"key": "search",
+													"value": "Chainsmokers"
+												},
+												{
+													"key": "sort",
+													"value": "id"
+												},
+												{
+													"key": "page",
+													"value": "2"
+												},
+												{
+													"key": "limit",
+													"value": "2"
+												},
+												{
+													"key": "sortBy",
+													"value": "DESC"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GET ONE EVENTS",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/events/:id",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"events",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "CREATE EVENTS",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/C:/Users/itmam/Downloads/f10ff70a7155e5ab666bcdd1b45b726d.jpg"
+												},
+												{
+													"key": "title",
+													"value": "Konser Blackpink",
+													"type": "default"
+												},
+												{
+													"key": "date",
+													"value": "2023-05-10",
+													"type": "default"
+												},
+												{
+													"key": "cityId",
+													"value": "5",
+													"type": "default"
+												},
+												{
+													"key": "description",
+													"value": "Lorem ipsum dolor sit amet",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/events/manage",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"events",
+												"manage"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "UPDATE EVENTS",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "picture",
+													"type": "file",
+													"src": "/C:/Users/itmam/Downloads/download.jpg"
+												},
+												{
+													"key": "title",
+													"value": "Konser Alan Walker",
+													"type": "default"
+												},
+												{
+													"key": "date",
+													"value": "2023-05-30",
+													"type": "default"
+												},
+												{
+													"key": "cityId",
+													"value": "1",
+													"type": "default"
+												},
+												{
+													"key": "description",
+													"value": "Lorem ipsum dolor sit amet",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/events/manage/:id",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"events",
+												"manage",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DELETE EVENTS",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/events/manage/:id",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"events",
+												"manage",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": ""
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "GET EVENT",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/events",
+									"raw": "{{url}}/event",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"events"
+										"event"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "GET ONE EVENTS",
+							"name": "GET DETAIL EVENT",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -2698,42 +2924,6 @@
 											"key": "id",
 											"value": ""
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "CREATE EVENTS",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/events/manage",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"events",
-										"manage"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "UPDATE EVENTS",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{url}}/events/manage",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"events",
-										"manage"
 									]
 								}
 							},
@@ -2771,6 +2961,21 @@
 							"request": {
 								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "reservationId",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "paymentMethodId",
+											"value": "",
+											"type": "default"
+										}
+									]
+								},
 								"url": {
 									"raw": "{{url}}/payment",
 									"host": [
@@ -2793,6 +2998,26 @@
 							"request": {
 								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "eventId",
+											"value": "3",
+											"type": "default"
+										},
+										{
+											"key": "statusId",
+											"value": "2",
+											"type": "default"
+										},
+										{
+											"key": "paymentMethodId",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
 								"url": {
 									"raw": "{{url}}/reservations",
 									"host": [
@@ -2800,6 +3025,44 @@
 									],
 									"path": [
 										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CREATE RESERVATION TICKET",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "reservationId",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "sectionId",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "quantity",
+											"value": "",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/reservations/ticket",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"reservations",
+										"ticket"
 									]
 								}
 							},
@@ -2828,24 +3091,49 @@
 							"response": []
 						},
 						{
-							"name": "GET ONE WISHLIST",
+							"name": "MANAGE WISHLISTS",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "eventId",
+											"value": "",
+											"type": "default"
+										}
+									]
+								},
 								"url": {
-									"raw": "{{url}}/wishlist/:id",
+									"raw": "{{url}}/wishlist",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"wishlist",
-										":id"
+										"wishlist"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "HISTORY",
+					"item": [
+						{
+							"name": "GET HISTORY",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/history",
+									"host": [
+										"{{url}}"
 									],
-									"variable": [
-										{
-											"key": "id",
-											"value": ""
-										}
+									"path": [
+										"history"
 									]
 								}
 							},
@@ -2875,7 +3163,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "{{tokens}}",
+				"value": "{{token}}",
 				"type": "string"
 			}
 		]
@@ -2903,7 +3191,13 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "http://localhost:8000",
+			"value": "https://fw15-backend-fahmipraga.vercel.app/",
+			"type": "default",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "http://localhost:8080",
 			"type": "default"
 		}
 	]
