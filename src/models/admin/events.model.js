@@ -18,6 +18,25 @@ exports.findAll = async function(page, limit, search, sort, sortBy){
     return rows
 }
 
+exports.findEventsByUser = async function(id){
+    const query = `
+    SELECT
+      "e"."id",
+      "e"."picture",
+      "e"."title",
+      "c"."name" AS "location",
+      "e"."date",
+      "e"."descriptions"
+      FROM "events" "e"
+      JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+      WHERE "e"."id" = $1
+    `
+
+    const values = [id]
+    const { rows } = await db.query(query, values)
+    return rows[0]
+}
+
 exports.findOne = async function(id){
     const query = `
     SELECT * FROM "events" WHERE id=$1

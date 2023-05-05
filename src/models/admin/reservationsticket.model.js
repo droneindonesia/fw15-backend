@@ -17,6 +17,29 @@ exports.findAll = async function(page, limit, sort, sortBy){
     return rows
 }
 
+exports.getInfo = async(id) => {
+    const queries = `
+    SELECT
+    "e"."title" AS "eventName",
+    "rs"."name" AS "section",
+    "rs"."price" AS "price",
+    "rt"."quantity" AS "quantity",
+    "rsta"."name" AS "reservationStatus",
+    "pm"."name" AS "paymentMethod"
+    FROM "reservationTickets" "rt"
+    INNER JOIN "reservationSections" "rs" ON "rs"."id" = "rt"."sectionId"
+    INNER JOIN "reservations" "r" ON "r"."id" = "rt"."reservationId"
+    INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    INNER JOIN "reservationStatus" "rsta" ON "rsta"."id" = "r"."statusId"
+    INNER JOIN "paymentMethods" "pm" ON "pm"."id" = "r"."paymentMethodId"
+    WHERE "r"."id" = $1
+    `  
+    const values = [id]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
+
 exports.findOne = async function(id){
     const query = `
     SELECT * FROM "reservationsTickets" WHERE id=$1

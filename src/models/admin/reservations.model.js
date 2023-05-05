@@ -27,28 +27,16 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
-exports.findAllByUserId = async (userId) => {
+exports.findOneByUserId = async (userId) => {
     const query = `
-    SELECT 
-    "events"."id" as "eventId",
-    "users"."id" as "userId",
-    "events"."title",
-    "events"."date",
-    "events"."cityId",
-    "events"."description",
-    "events"."createdBy",
-    "reservationStatus"."id" as "statusId",
-    "reservationStatus"."name" as "statusName",
-    "paymentMethod"."id" as "paymentMethodId",
-    "paymentMethod"."name" as "paymentMethodName",
-    "reservations"."createdAt",
-    "reservations"."updatedAt"
-    FROM "reservations" 
-    JOIN "events" ON "events"."id" = "reservations"."eventId"
-    JOIN "users" ON "users"."id" = "reservations"."userId"
-    JOIN "reservationStatus" ON "reservationStatus"."id" = "reservations"."statusId"
-    JOIN "paymentMethod" ON "paymentMethod"."id" = "reservations"."paymentMethodId"
-    WHERE "reservations"."userId"=$1
+    SELECT
+    "e"."title",
+    "c"."name",
+    "e"."date"
+    FROM "reservations" "r"
+    INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
+    INNER JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    WHERE "r"."userId" = $1
     `
     const values = [userId]
     const { rows } = await db.query(query, values)

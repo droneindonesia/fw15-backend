@@ -1,5 +1,6 @@
 const errorHandler = require("../helpers/errorHandler.helper")
 const eventsModel = require("../models/admin/events.model")
+const eventCategoriesModel = require("../models/admin/eventcategories.model")
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -22,7 +23,7 @@ exports.getAllEvents = async (req, res) => {
 
 exports.getEventsById = async (req, res) => {
     try {
-        let {id} = req.user
+        let { id } = req.user
         let data = await eventsModel.findOne(id)
         return res.json({
             success: true,
@@ -34,14 +35,36 @@ exports.getEventsById = async (req, res) => {
     }
 }
 
-
-exports.addEvents = async (req, res) => {
+exports.getEvents = async (req, res) => {
     try {
-        let data = await eventsModel.insert(req.body)
+        const {id} = req.user
+        let getEvents = await eventsModel.findEventByUser(id)
+        return res.json({
+            success: true,
+            message: "List event that you get",
+            results: getEvents
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
+
+exports.createEvent = async (req, res) => {
+    try {
+        const {id} = req.user
+        let data = { ...req.body, createdBy: id }
+        const event = await eventsModel.insert(data)
+        const eventCategories = {
+            eventId: event.id,
+            categoryId: data.categoryId
+        }
+
+        await eventCategoriesModel.insert(eventCategories)
+
         return res.json({
             success: true,
             message: "Created events successfully",
-            results: data
+            results: event
         })
     } catch (err) {
         return errorHandler(res, err)
@@ -50,11 +73,28 @@ exports.addEvents = async (req, res) => {
 
 exports.updateEvents = async (req, res) => {
     try {
-        let {id} = req.user
-        let data = await eventsModel.update(id, req.body)
+        const data = {...req.body}
+        const event = await eventsModel.update(req.params.id, data)
         return res.json({
             success: true,
-            message: `Update events ${req.params.id} successfully`,
+            message: "Update events successfully",
+            results: event
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
+
+exports.destroy = async (req, res) => {
+    try {
+        const { id } = req.user
+        if (!id) {
+            throw Error("Unauthorized")
+        }
+        const data = await eventsModel.destroy(req.params.id)
+        return res.json({
+            success: true,
+            message: "Delete events successfully",
             results: data
         })
     } catch (err) {

@@ -27,21 +27,18 @@ exports.findOne = async function(id){
     return rows[0]
 }
 
-exports.findAllByUserId = async (userId) => {
+exports.findOneById = async (userId) => {
     const query = `
     SELECT 
-    "events"."id" as "eventId",
-    "users"."id" as "userId",
-    "events"."title",
-    "cities"."name" as "location",
-    "events"."date",
-    "wishlist"."createdAt",
-    "wishlist"."updatedAt"
-    FROM "wishlist" 
-    JOIN "events" ON "events"."id" = "wishlist"."eventId"
-    JOIN "users" ON "users"."id" = "wishlist"."userId"
-    JOIN "cities" ON "cities"."id" = "events"."cityId"
-    WHERE "wishlist"."userId"=$1
+    "e"."id",
+    "e"."title",
+    "e"."date",
+    "c"."name" AS "location",
+    "w"."userId"
+    FROM "wishlists" "w"
+    JOIN "events" "e" ON "e"."id" = "w"."eventId"
+    JOIN "cities" "c" ON "c"."id" = "e"."cityId"
+    WHERE "userId" = $1;
     `
     const values = [userId]
     const { rows } = await db.query(query, values)
