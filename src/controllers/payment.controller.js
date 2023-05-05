@@ -11,19 +11,19 @@ exports.createPayments = async (req, res) => {
 
         const information = await reservationTicketModel.getInfo(id)
 
-        // const price = parseInt(information.price)
-        // const quantity = parseInt(information.quantity)
-        // const totalPayment = price * quantity
+        const price = parseInt(information.price)
+        const quantity = parseInt(information.quantity)
+        const totalPayment = price * quantity
 
-        // const paymentInformation = {
-        //   ...information,
-        //   totalPayment
-        // }
+        const paymentInformation = {
+          ...information,
+          totalPayment
+        }
 
         return res.json({
           success: true,
           message: "Change payment method successfully",
-          results: information
+          results: paymentInformation
         })
 
     } catch (err) {

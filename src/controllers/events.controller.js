@@ -40,9 +40,8 @@ exports.getEventsById = async (req, res) => {
 
 exports.getEvents = async (req, res) => {
     try {
-        const {id} = req.user
-        console.log(id)
-        let getEvents = await eventsModel.findEventByUser(id)
+        const { id } = req.user
+        let getEvents = await eventsModel.findEventsByUser(id)
         return res.json({
             success: true,
             message: "List event that you get",
@@ -77,8 +76,9 @@ exports.createEvent = async (req, res) => {
 
 exports.updateEvents = async (req, res) => {
     try {
+        const { id } = req.user
         const data = {...req.body}
-        const event = await eventsModel.update(req.params.id, data)
+        const event = await eventsModel.update(id, data)
         return res.json({
             success: true,
             message: "Update events successfully",

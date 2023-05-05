@@ -2415,7 +2415,7 @@
 							"urlencoded": [
 								{
 									"key": "fullName",
-									"value": "itmamulfahmi",
+									"value": "Itmamul Fahmi",
 									"type": "default"
 								},
 								{
@@ -2537,7 +2537,7 @@
 									"formdata": [
 										{
 											"key": "fullName",
-											"value": "Fahmi Itmamul",
+											"value": "Itmamul Fahmi",
 											"type": "default"
 										},
 										{
@@ -2557,7 +2557,7 @@
 										},
 										{
 											"key": "profession",
-											"value": "programmer",
+											"value": "web developer",
 											"type": "default"
 										},
 										{
@@ -2701,58 +2701,13 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{url}}/events?search=Chainsmokers&sort=id&page=2&limit=2&sortBy=DESC",
-											"host": [
-												"{{url}}"
-											],
-											"path": [
-												"events"
-											],
-											"query": [
-												{
-													"key": "search",
-													"value": "Chainsmokers"
-												},
-												{
-													"key": "sort",
-													"value": "id"
-												},
-												{
-													"key": "page",
-													"value": "2"
-												},
-												{
-													"key": "limit",
-													"value": "2"
-												},
-												{
-													"key": "sortBy",
-													"value": "DESC"
-												}
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "GET ONE EVENTS",
-									"request": {
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{url}}/events/:id",
+											"raw": "{{url}}/events/manage",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"events",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": "1"
-												}
+												"manage"
 											]
 										}
 									},
@@ -2773,7 +2728,7 @@
 												},
 												{
 													"key": "title",
-													"value": "Konser Blackpink",
+													"value": "Konser Lady Gaga",
 													"type": "default"
 												},
 												{
@@ -2842,20 +2797,13 @@
 											]
 										},
 										"url": {
-											"raw": "{{url}}/events/manage/:id",
+											"raw": "{{url}}/events/manage",
 											"host": [
 												"{{url}}"
 											],
 											"path": [
 												"events",
-												"manage",
-												":id"
-											],
-											"variable": [
-												{
-													"key": "id",
-													"value": ""
-												}
+												"manage"
 											]
 										}
 									},
@@ -2894,12 +2842,39 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/event",
+									"raw": "{{url}}/events",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"event"
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": null,
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -2922,7 +2897,7 @@
 									"variable": [
 										{
 											"key": "id",
-											"value": ""
+											"value": "1"
 										}
 									]
 								}
@@ -2954,43 +2929,6 @@
 					]
 				},
 				{
-					"name": "PAYMENT",
-					"item": [
-						{
-							"name": "CREATE PAYMENTS",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "reservationId",
-											"value": "",
-											"type": "default"
-										},
-										{
-											"key": "paymentMethodId",
-											"value": "",
-											"type": "default"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/payment",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"payment"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "RESERVATIONS",
 					"item": [
 						{
@@ -3003,12 +2941,12 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "3",
+											"value": "1",
 											"type": "default"
 										},
 										{
 											"key": "statusId",
-											"value": "2",
+											"value": "1",
 											"type": "default"
 										},
 										{
@@ -3040,17 +2978,17 @@
 									"urlencoded": [
 										{
 											"key": "reservationId",
-											"value": "",
+											"value": "1",
 											"type": "default"
 										},
 										{
 											"key": "sectionId",
-											"value": "",
+											"value": "1",
 											"type": "default"
 										},
 										{
 											"key": "quantity",
-											"value": "",
+											"value": "3",
 											"type": "default"
 										}
 									]
@@ -3063,6 +3001,43 @@
 									"path": [
 										"reservations",
 										"ticket"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PAYMENT",
+					"item": [
+						{
+							"name": "CREATE PAYMENTS",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "reservationId",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "paymentMethodId",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/payment",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payment"
 									]
 								}
 							},
@@ -3100,7 +3075,7 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "",
+											"value": "1",
 											"type": "default"
 										}
 									]
