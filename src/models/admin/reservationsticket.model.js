@@ -21,7 +21,7 @@ exports.getInfo = async(id) => {
     const queries = `
     SELECT
     "e"."title" AS "eventName",
-    "rs"."name" AS "section",
+    "rs"."name" AS "TicketSection",
     "rs"."price" AS "price",
     "rt"."quantity" AS "quantity",
     "rsta"."name" AS "reservationStatus",
