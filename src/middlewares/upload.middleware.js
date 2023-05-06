@@ -40,7 +40,7 @@ const limits = {
 }
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
+    if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png" && file.mimetype !== "image/svg+xml") {
         cb(Error("fileformat_error"))
     }
     cb(null, true)
