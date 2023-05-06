@@ -15,7 +15,7 @@ const storage = new CloudinaryStorage({
     params: {
         folder: "uploads",
         format: async (req, file) => path.extname(file.originalname).slice("1"),
-        public_id: () => "computed-filename-using-request",
+        public_id: () => `${new Date().getDate()}`,
     },
 })
 
