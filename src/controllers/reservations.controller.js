@@ -1,5 +1,6 @@
 const reservationsModel = require("../models/admin/reservations.model")
 const errorHandler = require("../helpers/errorHandler.helper")
+const eventsModel = require("../models/admin/events.model")
 const reservationsTicketModel = require("../models/admin/reservationsticket.model")
 
 exports.createReservations = async (req, res) => {
@@ -11,6 +12,12 @@ exports.createReservations = async (req, res) => {
         }
 
         const data = {userId: id, ...req.body}
+
+        const checkEvent = await eventsModel.findOne(req.body.eventId)
+        
+        if (!checkEvent) {
+            throw Error ("Event is not found")
+        }
 
         const reservation = await reservationsModel.insert(data)
         return res.json({
@@ -27,11 +34,21 @@ exports.createReservations = async (req, res) => {
 exports.makeTicket = async (req, res) => {
     try {
         const { id } = req.user
+
         if (!id) {
             throw Error ("Unauthorized")
         }
+
         const data = { ...req.body }
+
+        const reservation = await reservationsModel.findByIdAndUserId(data.reservationId)
+
+        if(!reservation){
+            throw Error ("Reservation is not found")
+        }
+
         const ticket = await reservationsTicketModel.insert(data)
+
         return res.json({
             success: true,
             message: "Add ticket successfully",

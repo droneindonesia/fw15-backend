@@ -43,6 +43,16 @@ exports.findOneByUserId = async (userId) => {
     return rows[0]
 }
 
+exports.findByIdAndUserId = async(id, userId) => {
+    const queries = `
+    SELECT * FROM "reservations"
+    WHERE "id" = $1 AND "userId" = $2
+    `  
+    const values = [id, userId]
+    const {rows} = await db.query(queries,values)  
+    return rows[0]
+}
+
 exports.insert = async function(data){
     const query = `
     INSERT INTO "reservations" ("eventId", "userId", "statusId", "paymentMethodId") 
