@@ -16,7 +16,7 @@ const storage = new CloudinaryStorage({
         folder: "uploads",
         format: async (req, file) => path.extname(file.originalname).slice("1"),
         public_id: () => {
-            const randomNumber = Math.round(Math.random() * 90000)
+            const randomNumber = Math.round(Math.random() * 5000)
             const name = `${new Date().getDate()}_${randomNumber}`
             return name
         },
