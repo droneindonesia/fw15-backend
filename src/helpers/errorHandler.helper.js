@@ -34,6 +34,11 @@ const errorHandler = (response, e) => {
             success: false,
             message: "Token signature is invalid"
         })
+    } else if (e?.message?.includes("event is not found")){
+        return response.json({
+            success: false,
+            message: "Can't make wishlist because event is not found"
+        }) 
     } else {
         console.log(e)
         return response.status(500).json({
