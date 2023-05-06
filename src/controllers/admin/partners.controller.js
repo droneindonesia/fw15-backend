@@ -40,6 +40,9 @@ exports.getOnePartners = async (request, response) => {
 exports.createPartners = async (request, response) => {
     try {
         const user = await partnersModel.insert(request.body)
+        if(request.file){
+            request.body.picture = request.file.filename
+        }
         return response.json({
             success: true,
             message: `Created partners ${request.body.name} successfully`,
@@ -54,6 +57,9 @@ exports.createPartners = async (request, response) => {
 exports.updatePartners = async (request, response) => {
     try {
         const data = await partnersModel.update(request.params.id, request.body)
+        if(request.file){
+            request.body.picture = request.file.filename
+        }
         if (data) {
             return response.json({
                 success: true,

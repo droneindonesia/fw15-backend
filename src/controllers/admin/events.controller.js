@@ -40,6 +40,9 @@ exports.getOneEvents = async (request, response) => {
 exports.createEvents = async (request, response) => {
     try {
         const user = await eventsModel.insert(request.body)
+        if(request.file){
+            request.body.picture = request.file.filename
+        }
         return response.json({
             success: true,
             message: `Created user ${request.body.title} successfully`,
@@ -54,6 +57,9 @@ exports.createEvents = async (request, response) => {
 exports.updateEvents = async (request, response) => {
     try {
         const data = await eventsModel.update(request.params.id, request.body)
+        if(request.file){
+            request.body.picture = request.file.filename
+        }
         if (data) {
             return response.json({
                 success: true,

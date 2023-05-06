@@ -39,6 +39,9 @@ exports.getOneCities = async (request, response) => {
 
 exports.createcities = async (request, response) => {
     try {
+        if(request.file){
+            request.body.picture = request.file.filename
+        }
         const user = await citiesModel.insert(request.body)
         return response.json({
             success: true,
@@ -54,6 +57,9 @@ exports.createcities = async (request, response) => {
 exports.updatecities = async (request, response) => {
     try {
         const data = await citiesModel.update(request.params.id, request.body)
+        if(request.file){
+            request.body.picture = request.file.filename
+        }
         if (data) {
             return response.json({
                 success: true,
