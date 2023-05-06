@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: "uploads",
-        format: async (req, file) => "jpg", // supports promises as well
+        format: async (req, file) => path.extname(file.originalname).slice("1"),
         public_id: (req, file) => "computed-filename-using-request",
     },
 })
