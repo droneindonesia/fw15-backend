@@ -63,6 +63,10 @@ exports.createEvent = async (req, res) => {
         }
 
         await eventCategoriesModel.insert(eventCategories)
+        
+        if(req.file){
+            req.body.picture = req.file.filename
+        }
 
         return res.json({
             success: true,
@@ -79,6 +83,10 @@ exports.updateEvents = async (req, res) => {
         const { id } = req.user
         const data = {...req.body}
         const event = await eventsModel.update(id, data)
+
+        if(req.file){
+            req.body.picture = req.file.filename
+        }
         return res.json({
             success: true,
             message: "Update events successfully",
