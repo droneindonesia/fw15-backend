@@ -126,20 +126,20 @@ const rules = {
             .withMessage("Name should be a string") 
     ],
     paymentmethod: [
-        body("name")
+        body("reservationId")
             .optional()
-            .isString()
-            .withMessage("Name should be a string")
+            .isInt()
+            .withMessage("Reservation ID should be a number"),
+        body("paymentMethodId")
+            .optional()
+            .isInt()
+            .withMessage("Payment method ID should be a number")
     ],
     reservations: [
         body("eventId")
             .optional()
             .isInt()
             .withMessage("Event Id should be a number"),
-        body("userId")
-            .optional()
-            .isInt()
-            .withMessage("User id should be a number"),
         body("statusId")
             .optional()
             .isInt()
@@ -173,7 +173,7 @@ const rules = {
         body("sectionId")
             .optional()
             .isInt()
-            .withMessage("Section Id should be a number"),
+            .withMessage("Section ID should be a number"),
         body("quantity")
             .optional()
             .isInt()
@@ -190,15 +190,21 @@ const rules = {
             .withMessage("Invalid type for password"),
         checkDuplicateEmail
     ],
-    wishlist: [
-        body("userId")
+    wishlists: [
+        body("userid")
             .optional()
             .isInt()
-            .withMessage("User id should be a number"),
+            .withMessage("userId Should be a number"),
         body("eventId")
             .optional()
             .isInt()
-            .withMessage("Event id should be a number")
+            .withMessage("Event Id should be a number")
+    ],
+    manageWishlist: [
+        body("eventId")
+            .optional()
+            .isInt()
+            .withMessage("event ID should be a number")
     ],
     forgotPassword: [
         body("email")
