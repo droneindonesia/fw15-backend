@@ -1,5 +1,5 @@
-require("dotenv").config()
 const multer = require("multer")
+const errorHandler = require("../helpers/errorHandler.helper")
 const cloudinary = require("cloudinary").v2
 const { CloudinaryStorage } = require("multer-storage-cloudinary")
 const path = require("path")
@@ -28,40 +28,37 @@ const storage = new CloudinaryStorage({
 //         const ext = file.originalname.split(".")[explode - 1]
 //         const filename = new Date().getTime().toString() + "." + ext
 //         cb(null, filename)
-//     }
+//     },
 // })
 
 const limits = {
-    fileSize: 1 * 1024 * 1024
+    fileSize: 1 * 1024 * 1024,
 }
 
 const fileFilter = (req, file, cb) => {
-    if(file.mimetype !== "images/jpeg"/*  || file.mimetype !== "image/svg+xml" */){
+    if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
         cb(Error("fileformat_error"))
     }
     cb(null, true)
 }
 
-const upload = multer({storage, limits, fileFilter})
+const upload = multer({ storage, limits, fileFilter })
 
 const uploadMiddleware = (field) => {
     const uploadField = upload.single(field)
     return (req, res, next) => {
         uploadField(req, res, (err) => {
-            if(err){
-                if(err.message === "fileformat_error"){
-                    return res.status(400).json({
-                        success: false,
-                        message: "File format invalid"
-                    })
+            try {
+                if (err) {
+                    if (err.message === "fileformat_error") {
+                        throw Error("fileformat_error")
+                    }
+                    throw Error(err.message)
                 }
-                return res.status(400).json({
-                    success: false,
-                    message: "File too large",
-                    error: err
-                })
+                return next()
+            } catch (err) {
+                return errorHandler(res, err)
             }
-            return next()
         })
     }
 }
