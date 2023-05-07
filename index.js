@@ -11,7 +11,7 @@ const PORT = process.env.PORT
 const cors = require("cors")
 
 app.use(cors({
-    origin: "https://localhost:5173/",
+    origin: "http://localhost:5173",
     optionsSuccessStatus: 200
 }))
 
