@@ -39,13 +39,13 @@ exports.getOneEvents = async (request, response) => {
 
 exports.createEvents = async (request, response) => {
     try {
-        const user = await eventsModel.insert(request.body)
         if(request.file){
             request.body.picture = request.file.filename
         }
+        const user = await eventsModel.insert(request.body)
         return response.json({
             success: true,
-            message: `Created user ${request.body.title} successfully`,
+            message: `Created events ${request.body.title} successfully`,
             result: user
         })
     } catch(e) {

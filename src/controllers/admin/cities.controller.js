@@ -42,7 +42,6 @@ exports.createcities = async (request, response) => {
         if(request.file){
             request.body.picture = request.file.filename
         }
-        console.log(request.file)
         const user = await citiesModel.insert(request.body)
         return response.json({
             success: true,
