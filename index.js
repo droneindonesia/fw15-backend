@@ -11,7 +11,7 @@ const PORT = process.env.PORT
 const cors = require("cors")
 
 app.use(cors({
-    origin: "https://fahmi-fw15-frontend.netlify.app",
+    origin: "https://fw15-frontend.vercel.app",
     optionsSuccessStatus: 200
 }))
 
