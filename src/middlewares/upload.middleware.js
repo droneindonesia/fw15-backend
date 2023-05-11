@@ -1,29 +1,29 @@
 const multer = require("multer")
 const errorHandler = require("../helpers/errorHandler.helper")
-// const cloudinary = require("cloudinary").v2
-// const { CloudinaryStorage } = require("multer-storage-cloudinary")
-// const path = require("path")
+const cloudinary = require("cloudinary").v2
+const { CloudinaryStorage } = require("multer-storage-cloudinary")
+const path = require("path")
 
-// cloudinary.config({
-//     cloud_name: process.env.CLOUD_NAME,
-//     api_key: process.env.CLOUDINARY_API_KEY,
-//     api_secret: process.env.CLOUDINARY_API_SECRET
-// })
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
-// const storage = new CloudinaryStorage({
-//     cloudinary: cloudinary,
-//     params: {
-//         folder: "uploads",
-//         format: async (req, file) => path.extname(file.originalname).slice("1"),
-//         public_id: () => {
-//             const randomNumber = Math.round(Math.random() * 5000)
-//             const name = `${new Date().getDate()}_${randomNumber}`
-//             return name
-//         },
-//     },
-// })
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: "uploads",
+        format: async (req, file) => path.extname(file.originalname).slice("1"),
+        public_id: () => {
+            const randomNumber = Math.round(Math.random() * 5000)
+            const name = `${new Date().getDate()}_${randomNumber}`
+            return name
+        },
+    },
+})
 
-const storage = multer.diskStorage({
+/* const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads/")
     },
@@ -34,6 +34,7 @@ const storage = multer.diskStorage({
         cb(null, filename)
     },
 })
+ */
 
 const limits = {
     fileSize: 1 * 1024 * 1024,
