@@ -11,7 +11,7 @@ const PORT = process.env.PORT
 const cors = require("cors")
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://fahmi-fw15-frontend.netlify.app",
     optionsSuccessStatus: 200
 }))
 
