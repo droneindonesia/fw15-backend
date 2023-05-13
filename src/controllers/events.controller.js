@@ -44,11 +44,7 @@ exports.getEvent = async (req, res) => {
 
 exports.getEventsById = async (req, res) => {
     try {
-        let { id } = req.user
-        if (!id) {
-            throw Error("Unauthorized")
-        }
-        let data = await eventsModel.findOne(req.params.id)
+        let data = await eventsModel.findEventsByUser(req.params.id)
         return res.json({
             success: true,
             message: "Get one events successfully",
