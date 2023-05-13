@@ -9,21 +9,21 @@ exports.updateProfile = async (req, res) => {
         const data = {
             ...req.body,
         }
-        if(req.file){
-            if(user.picture){
-                fileRemover({filename: user.picture})
+        if (req.file) {
+            if (user.picture) {
+                fileRemover({ filename: user.picture })
             }
-            data.picture =  req.file.filename
+            data.picture = req.file.filename
         }
         const profile = await profileModel.updatebyUserId(id, data)
-        if(!profile){
-            throw Error ("Update profile failed")
+        if (!profile) {
+            throw Error("Update profile failed")
         }
         return res.json({
             success: true,
             message: "Profile updated",
-            result: profile
-        }) 
+            result: profile,
+        })
     } catch (e) {
         return errorHandler(res, e)
     }
@@ -34,15 +34,15 @@ exports.getProfile = async (req, res) => {
         const { id } = req.user
         console.log(req.user)
         const profile = await profileModel.findOneByUserId(id)
-        if(!profile){
+        if (!profile) {
             throw Error("profile_not_found")
         }
         return res.json({
             success: true,
             message: "Profile",
-            results: profile
+            results: profile,
         })
-    } catch(e) {
+    } catch (e) {
         return errorHandler(res, e)
     }
 }

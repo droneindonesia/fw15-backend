@@ -10,7 +10,7 @@ exports.createPayments = async (req, res) => {
         }
 
         const checkReservation = await reservationModel.findOne(id)
-        if(!checkReservation) {
+        if (!checkReservation) {
             throw Error("Reservation is not found")
         }
 
@@ -22,15 +22,14 @@ exports.createPayments = async (req, res) => {
 
         const paymentInformation = {
             ...information,
-            totalPayment
+            totalPayment,
         }
 
         return res.json({
             success: true,
             message: "Add payment successfully",
-            results: paymentInformation
+            results: paymentInformation,
         })
-
     } catch (err) {
         return errorHandler(res, err)
     }

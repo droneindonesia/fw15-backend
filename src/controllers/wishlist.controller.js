@@ -9,7 +9,7 @@ exports.getWishlist = async (req, res) => {
         return res.json({
             success: true,
             message: "Get wishlist successfully",
-            results: wishlistData
+            results: wishlistData,
         })
     } catch (err) {
         return errorHandler(res, err)
@@ -20,11 +20,11 @@ exports.makeWishlist = async (req, res) => {
     try {
         let { id } = req.user
 
-        const data = { ...req.body, userId: id}
+        const data = { ...req.body, userId: id }
 
         const checkEvent = await eventsModel.findOne(id)
         if (!checkEvent) {
-            throw Error ("Can't make wishlist because event is not found")
+            throw Error("Can't make wishlist because event is not found")
         }
 
         const wishlist = await wishlistModel.insert(data)
@@ -32,7 +32,7 @@ exports.makeWishlist = async (req, res) => {
         return res.json({
             success: true,
             message: "Insert wishlist successfully",
-            results: wishlist
+            results: wishlist,
         })
     } catch (err) {
         return errorHandler(res, err)

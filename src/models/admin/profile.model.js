@@ -1,34 +1,34 @@
 const db = require("../../helpers/db.helper")
 
-exports.findAll = async function(page, limit, search, sort, sortBy){
+exports.findAll = async function (page, limit, search, sort, sortBy) {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
     search = search || ""
     sort = sort || "id"
     sortBy = sortBy || "ASC"
-    
+
     const offset = (page - 1) * limit
     const query = `
     SELECT * FROM "profile" WHERE "fullName" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
     `
 
     const values = [limit, offset, `%${search}%`]
-    const {rows} = await db.query(query, values)
+    const { rows } = await db.query(query, values)
 
     return rows
 }
 
-exports.findOne = async function(id){
+exports.findOne = async function (id) {
     const query = `
     SELECT * FROM "profile" WHERE id=$1
     `
 
     const values = [id]
-    const {rows} = await db.query(query, values)  
+    const { rows } = await db.query(query, values)
     return rows[0]
 }
 
-exports.findOneByUserId = async function(userId){
+exports.findOneByUserId = async function (userId) {
     const query = `
     SELECT
     "u"."id",
@@ -49,22 +49,31 @@ exports.findOneByUserId = async function(userId){
     `
 
     const values = [userId]
-    const {rows} = await db.query(query, values)  
+    const { rows } = await db.query(query, values)
     return rows[0]
 }
 
-exports.insert = async function(data){
+exports.insert = async function (data) {
     const query = `
     INSERT INTO "profile" ("userId", "picture", "fullName", "phoneNumber", "gender", "profession", "nationality", "birthDate") 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
     `
 
-    const values = [data.userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthDate]
-    const {rows} = await db.query(query, values)
+    const values = [
+        data.userId,
+        data.picture,
+        data.fullName,
+        data.phoneNumber,
+        data.gender,
+        data.profession,
+        data.nationality,
+        data.birthDate,
+    ]
+    const { rows } = await db.query(query, values)
     return rows[0]
 }
 
-exports.update = async function(id, data){
+exports.update = async function (id, data) {
     const query = `
     UPDATE "profile" 
     SET 
@@ -80,12 +89,22 @@ exports.update = async function(id, data){
     RETURNING *
     `
 
-    const values = [id, data.userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthDate]
-    const {rows} = await db.query(query, values)
+    const values = [
+        id,
+        data.userId,
+        data.picture,
+        data.fullName,
+        data.phoneNumber,
+        data.gender,
+        data.profession,
+        data.nationality,
+        data.birthDate,
+    ]
+    const { rows } = await db.query(query, values)
     return rows[0]
 }
 
-exports.updatebyUserId = async function(userId, data){
+exports.updatebyUserId = async function (userId, data) {
     const query = `
     UPDATE "profile" 
     SET "picture"=COALESCE(NULLIF($2, ''), "picture"), 
@@ -99,12 +118,21 @@ exports.updatebyUserId = async function(userId, data){
     RETURNING *
     `
 
-    const values = [userId, data.picture, data.fullName, data.phoneNumber, data.gender, data.profession, data.nationality, data.birthDate]
-    const {rows} = await db.query(query, values)
+    const values = [
+        userId,
+        data.picture,
+        data.fullName,
+        data.phoneNumber,
+        data.gender,
+        data.profession,
+        data.nationality,
+        data.birthDate,
+    ]
+    const { rows } = await db.query(query, values)
     return rows[0]
 }
 
-exports.destroy = async function(id){
+exports.destroy = async function (id) {
     const query = `
     DELETE FROM "profile" 
     WHERE "id"=$1
@@ -112,6 +140,6 @@ exports.destroy = async function(id){
     `
 
     const values = [id]
-    const {rows} = await db.query(query, values)
+    const { rows } = await db.query(query, values)
     return rows[0]
 }

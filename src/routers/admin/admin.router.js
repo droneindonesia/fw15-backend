@@ -16,4 +16,3 @@ admin.use("/users", require("./users.router"))
 admin.use("/wishlists", require("./wishlist.router"))
 
 module.exports = admin
- 

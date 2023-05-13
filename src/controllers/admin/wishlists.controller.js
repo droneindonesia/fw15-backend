@@ -4,33 +4,33 @@ const errorHandler = require("../../helpers/errorHandler.helper")
 exports.getAllWishlist = async (request, response) => {
     try {
         const data = await wishlistModel.findAll(
-            request.query.page, 
-            request.query.limit, 
+            request.query.page,
+            request.query.limit,
             request.query.search,
             request.query.sort,
             request.query.sortBy
         )
-        return response.json({  
+        return response.json({
             success: true,
             message: "List of all wishlists",
-            results: data
-        }) 
+            results: data,
+        })
     } catch (e) {
         errorHandler(response, e)
     }
-} 
+}
 
 exports.getOneWishlist = async (request, response) => {
     try {
         let data = await wishlistModel.findOne(request.params.id)
-        if (data){
+        if (data) {
             return response.json({
                 success: true,
                 message: "Get one wishlist successfully",
-                results: data
+                results: data,
             })
         } else {
-            throw Error ("not_found")
+            throw Error("not_found")
         }
     } catch (e) {
         return errorHandler(response, e)
@@ -43,13 +43,12 @@ exports.createWishlist = async (request, response) => {
         return response.json({
             success: true,
             message: `Created wishlists ${request.body.userId} successfully`,
-            result: user
+            result: user,
         })
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }
-
 
 exports.updateWishlist = async (request, response) => {
     try {
@@ -58,12 +57,12 @@ exports.updateWishlist = async (request, response) => {
             return response.json({
                 success: true,
                 message: "Update wishlists successfully",
-                result: data
+                result: data,
             })
         } else {
-            throw Error ("not_found")
+            throw Error("not_found")
         }
-    } catch(e){
+    } catch (e) {
         errorHandler(response, e)
     }
 }
@@ -75,12 +74,12 @@ exports.deleteWishlist = async (request, response) => {
             return response.json({
                 success: true,
                 message: `Delete wishlists ${request.params.id} successfully`,
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }

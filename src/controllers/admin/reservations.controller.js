@@ -4,22 +4,22 @@ const errorHandler = require("../../helpers/errorHandler.helper")
 exports.getAllReservations = async (request, response) => {
     try {
         const data = await reservationsModel.findAll(
-            request.query.page, 
-            request.query.limit, 
+            request.query.page,
+            request.query.limit,
             request.query.search,
             request.query.sort,
             request.query.sortBy
         )
-        return response.json({  
+        return response.json({
             success: true,
             message: "List of all reservations",
-            results: data
-        }) 
+            results: data,
+        })
     } catch (e) {
         errorHandler(response, e)
     }
 }
- 
+
 exports.getOneReservations = async (request, response) => {
     try {
         let data = await reservationsModel.findOne(request.params.id)
@@ -27,7 +27,7 @@ exports.getOneReservations = async (request, response) => {
             return response.json({
                 success: true,
                 message: "Get one wishlist successfully",
-                results: data
+                results: data,
             })
         } else {
             throw Error("not_found")
@@ -43,27 +43,29 @@ exports.createReservations = async (request, response) => {
         return response.json({
             success: true,
             message: `Created reservations ${request.body.eventId} successfully`,
-            result: user
+            result: user,
         })
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }
 
-
 exports.updateReservations = async (request, response) => {
     try {
-        const data = await reservationsModel.update(request.params.id, request.body)
+        const data = await reservationsModel.update(
+            request.params.id,
+            request.body
+        )
         if (data) {
             return response.json({
                 success: true,
                 message: "Update reservations successfully",
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e){
+    } catch (e) {
         errorHandler(response, e)
     }
 }
@@ -75,12 +77,12 @@ exports.deleteReservations = async (request, response) => {
             return response.json({
                 success: true,
                 message: `Delete reservation ${request.params.id} successfully`,
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }

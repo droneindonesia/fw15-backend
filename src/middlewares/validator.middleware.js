@@ -3,17 +3,20 @@ const usersModel = require("../models/admin/users.model")
 const fileRemover = require("../helpers/fileremover.helper")
 
 const emailFormat = body("email").isEmail().withMessage("Email is invalid")
-const checkPassword =  body("password").isLength({min: 1}).isStrongPassword().withMessage("Password is invalid")
-const checkDuplicateEmail = body("email").custom(async value => {
+const checkPassword = body("password")
+    .isLength({ min: 1 })
+    .isStrongPassword()
+    .withMessage("Password is invalid")
+const checkDuplicateEmail = body("email").custom(async (value) => {
     const email = await usersModel.findOneByEmail(value)
-    if(email){
-        throw new Error ("Email is already in use")
+    if (email) {
+        throw new Error("Email is already in use")
     }
 })
 
-const checkDuplicateUsername = body("username").custom(async value => {
+const checkDuplicateUsername = body("username").custom(async (value) => {
     const user = await usersModel.findOneByUsername(value)
-    if(user){
+    if (user) {
         throw new Error("Username is already in use")
     }
 })
@@ -28,42 +31,34 @@ const validator = (req, res, next) => {
         if (!errors.isEmpty()) {
             fileRemover(req.file)
             return res.json({
-                results: errors
+                results: errors,
             })
         }
         return next()
-    } catch(e) {
+    } catch (e) {
         console.log(e)
         return res.status(400).json({
             success: false,
             message: "Validation error",
-            results: errors.array()
+            results: errors.array(),
         })
     }
 }
 
 const rules = {
-    authLogin: [
-        emailFormat,
-        checkPassword
-    ],
+    authLogin: [emailFormat, checkPassword],
     authRegister: [
         checkDuplicateUsername,
         emailFormat,
         checkPassword,
         checkDuplicateEmail,
-        checkDuplicatePass
+        checkDuplicatePass,
     ],
     categories: [
-        body("name")
-            .matches(/\d/)
-            .withMessage("name should be string")
+        body("name").matches(/\d/).withMessage("name should be string"),
     ],
     cities: [
-        body("name")
-            .optional()
-            .isString()
-            .withMessage("Name should be string"),
+        body("name").optional().isString().withMessage("Name should be string"),
         body("lat")
             .optional()
             .isInt()
@@ -71,7 +66,7 @@ const rules = {
         body("long")
             .optional()
             .isInt()
-            .withMessage("Longitude should be a number")
+            .withMessage("Longitude should be a number"),
     ],
     profile: [
         body("phoneNumber")
@@ -89,7 +84,7 @@ const rules = {
         body("birthDate")
             .optional()
             .isDate()
-            .withMessage("Input type is invalid for birth date")
+            .withMessage("Input type is invalid for birth date"),
     ],
     eventcategories: [
         body("eventId")
@@ -99,7 +94,7 @@ const rules = {
         body("categoryId")
             .optional()
             .isInt()
-            .withMessage("category id should be a number")
+            .withMessage("category id should be a number"),
     ],
     events: [
         body("title")
@@ -117,13 +112,13 @@ const rules = {
         body("description")
             .optional()
             .isString()
-            .withMessage("Description should be a string")
+            .withMessage("Description should be a string"),
     ],
     partners: [
         body("name")
             .optional()
             .isString()
-            .withMessage("Name should be a string") 
+            .withMessage("Name should be a string"),
     ],
     paymentmethod: [
         body("reservationId")
@@ -133,7 +128,7 @@ const rules = {
         body("paymentMethodId")
             .optional()
             .isInt()
-            .withMessage("Payment method ID should be a number")
+            .withMessage("Payment method ID should be a number"),
     ],
     reservations: [
         body("eventId")
@@ -147,7 +142,7 @@ const rules = {
         body("paymentMethodId")
             .optional()
             .isInt()
-            .withMessage("Payment method id should be a number")
+            .withMessage("Payment method id should be a number"),
     ],
     reservationsection: [
         body("name")
@@ -157,13 +152,10 @@ const rules = {
         body("price")
             .optional()
             .isInt()
-            .withMessage("Price should be a string")
+            .withMessage("Price should be a string"),
     ],
     reservationstatus: [
-        param("id")
-            .optional()
-            .isInt()
-            .withMessage("id should be a number")
+        param("id").optional().isInt().withMessage("id should be a number"),
     ],
     reservationsticket: [
         body("reservationId")
@@ -177,9 +169,9 @@ const rules = {
         body("quantity")
             .optional()
             .isInt()
-            .withMessage("Quantity should be a number")
+            .withMessage("Quantity should be a number"),
     ],
-    users : [
+    users: [
         body("email")
             .optional()
             .isEmail()
@@ -188,7 +180,7 @@ const rules = {
             .optional()
             .isStrongPassword()
             .withMessage("Invalid type for password"),
-        checkDuplicateEmail
+        checkDuplicateEmail,
     ],
     wishlists: [
         body("userid")
@@ -198,34 +190,28 @@ const rules = {
         body("eventId")
             .optional()
             .isInt()
-            .withMessage("Event Id should be a number")
+            .withMessage("Event Id should be a number"),
     ],
     manageWishlist: [
         body("eventId")
             .optional()
             .isInt()
-            .withMessage("event ID should be a number")
+            .withMessage("event ID should be a number"),
     ],
     forgotPassword: [
         body("email")
             .optional()
             .isEmail()
-            .withMessage("Invalid input type for email")
+            .withMessage("Invalid input type for email"),
     ],
     resetPassword: [
-        body("code")
-            .optional()
-            .isInt()
-            .withMessage("Code is invalid"),
-        body("email")
-            .optional()
-            .isEmail()
-            .withMessage("Incorrect email"),
+        body("code").optional().isInt().withMessage("Code is invalid"),
+        body("email").optional().isEmail().withMessage("Incorrect email"),
         body("password")
             .optional()
             .isStrongPassword()
             .withMessage("Password invalid"),
-        checkDuplicatePass
+        checkDuplicatePass,
     ],
     changePassword: [
         body("oldPassword")
@@ -236,34 +222,31 @@ const rules = {
             .optional()
             .isStrongPassword()
             .withMessage("Password invalid"),
-        body("confirmPassword").custom((value, {req}) => {
+        body("confirmPassword").custom((value, { req }) => {
             return value === req.body.newPassword
-        })
+        }),
     ],
     getAll: [
-        query("page").isInt().withMessage("Page should be a number").optional({values : "undefined" | "null" | "falsy"}),
-        query("limit").isInt().withMessage("Limit should be a number").optional(),
-        query("sortBy").isIn(["ASC", "DESC"]).withMessage("Input is invalid").optional()
-    ],  
-    getOne: [
-        param("id")
-            .optional()
+        query("page")
             .isInt()
-            .withMessage("id should be a number")
+            .withMessage("Page should be a number")
+            .optional({ values: "undefined" | "null" | "falsy" }),
+        query("limit")
+            .isInt()
+            .withMessage("Limit should be a number")
+            .optional(),
+        query("sortBy")
+            .isIn(["ASC", "DESC"])
+            .withMessage("Input is invalid")
+            .optional(),
+    ],
+    getOne: [
+        param("id").optional().isInt().withMessage("id should be a number"),
     ],
     Update: [
-        param("id")
-            .optional()
-            .isInt()
-            .withMessage("id should be a number")
+        param("id").optional().isInt().withMessage("id should be a number"),
     ],
-    Delete: [
-        param("id")
-            .optional()
-            .isInt()
-            .withMessage("id should be number")
-    ]
-
+    Delete: [param("id").optional().isInt().withMessage("id should be number")],
 }
 
 const validate = (selectedrules) => [rules[selectedrules], validator]

@@ -9,4 +9,3 @@ userRouter.patch("/:id", validate("Update"), userController.updateUsers)
 userRouter.delete("/:id", validate("Delete"), userController.deleteUsers)
 
 module.exports = userRouter
- 

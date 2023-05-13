@@ -4,17 +4,17 @@ const errorHandler = require("../../helpers/errorHandler.helper")
 exports.getAllPaymentMethod = async (request, response) => {
     try {
         const data = await paymentMethodModel.findAll(
-            request.query.page, 
-            request.query.limit, 
+            request.query.page,
+            request.query.limit,
             request.query.search,
             request.query.sort,
             request.query.sortBy
         )
-        return response.json({  
+        return response.json({
             success: true,
             message: "List of all payment method",
-            results: data
-        }) 
+            results: data,
+        })
     } catch (e) {
         errorHandler(response, e)
     }
@@ -27,7 +27,7 @@ exports.getOnePaymentMethod = async (request, response) => {
             return response.json({
                 success: true,
                 message: "Get one payment method successfully",
-                results: data
+                results: data,
             })
         } else {
             throw Error("not_found")
@@ -43,27 +43,29 @@ exports.createPaymentMethod = async (request, response) => {
         return response.json({
             success: true,
             message: `Created payment method ${request.body.name} successfully`,
-            result: data
+            result: data,
         })
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }
 
-
 exports.updatePaymentMethod = async (request, response) => {
     try {
-        const data = await paymentMethodModel.update(request.params.id, request.body)
+        const data = await paymentMethodModel.update(
+            request.params.id,
+            request.body
+        )
         if (data) {
             return response.json({
                 success: true,
                 message: "Update payment method successfully",
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e){
+    } catch (e) {
         errorHandler(response, e)
     }
 }
@@ -75,13 +77,12 @@ exports.deletePaymentMethod = async (request, response) => {
             return response.json({
                 success: true,
                 message: `Delete payment method ${request.params.id} successfully`,
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }
- 

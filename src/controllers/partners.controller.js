@@ -13,7 +13,7 @@ exports.getAllPartners = async (req, res) => {
         return res.json({
             success: true,
             message: "Get all partners successfully",
-            results: data
+            results: data,
         })
     } catch (err) {
         return errorHandler(res, err)

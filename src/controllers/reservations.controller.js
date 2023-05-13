@@ -11,21 +11,20 @@ exports.createReservations = async (req, res) => {
             throw Error("Unauthorized")
         }
 
-        const data = {userId: id, ...req.body}
+        const data = { userId: id, ...req.body }
 
         const checkEvent = await eventsModel.findOne(req.body.eventId)
-        
+
         if (!checkEvent) {
-            throw Error ("Event is not found")
+            throw Error("Event is not found")
         }
 
         const reservation = await reservationsModel.insert(data)
         return res.json({
             success: true,
             message: "Add reservations successfully",
-            results: reservation
+            results: reservation,
         })
-
     } catch (err) {
         return errorHandler(res, err)
     }
@@ -36,15 +35,17 @@ exports.makeTicket = async (req, res) => {
         const { id } = req.user
 
         if (!id) {
-            throw Error ("Unauthorized")
+            throw Error("Unauthorized")
         }
 
         const data = { ...req.body }
 
-        const reservation = await reservationsModel.findByIdAndUserId(data.reservationId)
+        const reservation = await reservationsModel.findByIdAndUserId(
+            data.reservationId
+        )
 
-        if(!reservation){
-            throw Error ("Reservation is not found")
+        if (!reservation) {
+            throw Error("Reservation is not found")
         }
 
         const ticket = await reservationsTicketModel.insert(data)
@@ -52,7 +53,7 @@ exports.makeTicket = async (req, res) => {
         return res.json({
             success: true,
             message: "Add ticket successfully",
-            results: ticket
+            results: ticket,
         })
     } catch (err) {
         return errorHandler(res, err)

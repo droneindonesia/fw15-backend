@@ -4,17 +4,17 @@ const errorHandler = require("../../helpers/errorHandler.helper")
 exports.getAllProfile = async (request, response) => {
     try {
         const data = await profileModel.findAll(
-            request.query.page, 
-            request.query.limit, 
+            request.query.page,
+            request.query.limit,
             request.query.search,
             request.query.sort,
             request.query.sortBy
         )
-        return response.json({  
+        return response.json({
             success: true,
             message: "List of all users",
-            results: data
-        }) 
+            results: data,
+        })
     } catch (e) {
         errorHandler(response, e)
     }
@@ -23,11 +23,11 @@ exports.getAllProfile = async (request, response) => {
 exports.getOneProfile = async (request, response) => {
     try {
         let data = await profileModel.findOne(request.params.id)
-        if(data){
+        if (data) {
             return response.json({
                 success: true,
                 message: "Get one profile successfully",
-                results: data
+                results: data,
             })
         } else {
             throw Error("not_found")
@@ -39,20 +39,19 @@ exports.getOneProfile = async (request, response) => {
 
 exports.createProfile = async (request, response) => {
     try {
-        if(request.file){
+        if (request.file) {
             request.body.picture = request.file.filename
         }
         const profile = await profileModel.insert(request.body)
         return response.json({
             success: true,
             message: `Created profile ${request.body.fullName} successfully`,
-            result: profile
+            result: profile,
         })
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }
- 
 
 exports.updateProfile = async (request, response) => {
     try {
@@ -61,12 +60,12 @@ exports.updateProfile = async (request, response) => {
             return response.json({
                 success: true,
                 message: "Update user successfully",
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e){
+    } catch (e) {
         errorHandler(response, e)
     }
 }
@@ -78,12 +77,12 @@ exports.deleteProfile = async (request, response) => {
             return response.json({
                 success: true,
                 message: `Delete profile ${request.params.id} successfully`,
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }

@@ -7,7 +7,7 @@ const path = require("path")
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
 const storage = new CloudinaryStorage({
@@ -41,7 +41,11 @@ const limits = {
 }
 
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png" && file.mimetype !== "image/svg+xml") {
+    if (
+        file.mimetype !== "image/jpeg" &&
+        file.mimetype !== "image/png" &&
+        file.mimetype !== "image/svg+xml"
+    ) {
         cb(Error("fileformat_error"))
     }
     cb(null, true)

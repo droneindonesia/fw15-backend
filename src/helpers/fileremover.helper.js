@@ -1,11 +1,11 @@
 const fs = require("fs")
 
 const fileRemover = (file) => {
-    if(file){
+    if (file) {
         const filename = `uploads/${file.filename}`
-        fs.unlink(filename, (err)=> {
+        fs.unlink(filename, (err) => {
             try {
-                if(err){
+                if (err) {
                     throw Error(err.message)
                 }
             } catch (err) {

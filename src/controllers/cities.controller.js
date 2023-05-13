@@ -13,9 +13,9 @@ exports.getAll = async (req, res) => {
         return res.json({
             success: true,
             message: "Get all cities successfully",
-            results: data
+            results: data,
         })
-    } catch(err) {
+    } catch (err) {
         return errorHandler(res, err)
     }
 }

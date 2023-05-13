@@ -1,24 +1,26 @@
 require("dotenv").config({
-    path: ".env"
+    path: ".env",
 })
 
 const express = require("express")
 const app = express()
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use("/uploads", express.static("uploads"))
 const PORT = process.env.PORT
 
 const cors = require("cors")
 
-app.use(cors({
+/* app.use(cors({
     origin: "https://fahmi-fw15-frontend.netlify.app",
     optionsSuccessStatus: 200
-}))
-
-/* app.use(cors({
-    origin: "http://localhost:5173",
-    optionsSuccessStatus: 200
 })) */
+
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        optionsSuccessStatus: 200,
+    })
+)
 
 app.use("/", require("./src/routers/index"))
 

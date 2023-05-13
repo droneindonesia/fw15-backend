@@ -1,43 +1,44 @@
 {
-  "name": "fw15-backend",
-  "version": "1.0.0",
-  "description": "Backend App",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "lint:fix": "eslint --fix index.js src/**/*.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fahmipraga/fw15-backend.git"
-  },
-  "keywords": [
-    "event",
-    "organizing",
-    "javascript",
-    "postgresql"
-  ],
-  "author": "Fahmi",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fahmipraga/fw15-backend/issues"
-  },
-  "homepage": "https://github.com/fahmipraga/fw15-backend#readme",
-  "devDependencies": {
-    "eslint": "^8.37.0",
-    "nodemon": "^2.0.22"
-  },
-  "dependencies": {
-    "argon2": "^0.30.3",
-    "cloudinary": "^1.36.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-validator": "^6.15.0",
-    "jsonwebtoken": "^9.0.0",
-    "multer": "^1.4.5-lts.1",
-    "multer-storage-cloudinary": "^4.0.0",
-    "pg": "^8.10.0"
-  }
+    "name": "fw15-backend",
+    "version": "1.0.0",
+    "description": "Backend App",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js",
+        "lint:fix": "eslint --fix index.js src/**/*.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/fahmipraga/fw15-backend.git"
+    },
+    "keywords": [
+        "event",
+        "organizing",
+        "javascript",
+        "postgresql"
+    ],
+    "author": "Fahmi",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/fahmipraga/fw15-backend/issues"
+    },
+    "homepage": "https://github.com/fahmipraga/fw15-backend#readme",
+    "devDependencies": {
+        "eslint": "^8.37.0",
+        "nodemon": "^2.0.22",
+        "prettier": "^2.8.8"
+    },
+    "dependencies": {
+        "argon2": "^0.30.3",
+        "cloudinary": "^1.36.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-validator": "^6.15.0",
+        "jsonwebtoken": "^9.0.0",
+        "multer": "^1.4.5-lts.1",
+        "multer-storage-cloudinary": "^4.0.0",
+        "pg": "^8.10.0"
+    }
 }

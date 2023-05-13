@@ -4,17 +4,17 @@ const errorHandler = require("../../helpers/errorHandler.helper")
 exports.getAllEvents = async (request, response) => {
     try {
         const data = await eventsModel.findAll(
-            request.query.page, 
-            request.query.limit, 
+            request.query.page,
+            request.query.limit,
             request.query.search,
             request.query.sort,
             request.query.sortBy
         )
-        return response.json({  
+        return response.json({
             success: true,
             message: "List of all users",
-            results: data
-        }) 
+            results: data,
+        })
     } catch (e) {
         errorHandler(response, e)
     }
@@ -27,7 +27,7 @@ exports.getOneEvents = async (request, response) => {
             return response.json({
                 success: true,
                 message: "Get one events method successfully",
-                results: data
+                results: data,
             })
         } else {
             throw Error("not_found")
@@ -39,37 +39,36 @@ exports.getOneEvents = async (request, response) => {
 
 exports.createEvents = async (request, response) => {
     try {
-        if(request.file){
+        if (request.file) {
             request.body.picture = request.file.filename
         }
         const user = await eventsModel.insert(request.body)
         return response.json({
             success: true,
             message: `Created events ${request.body.title} successfully`,
-            result: user
+            result: user,
         })
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }
 
-
 exports.updateEvents = async (request, response) => {
     try {
         const data = await eventsModel.update(request.params.id, request.body)
-        if(request.file){
+        if (request.file) {
             request.body.picture = request.file.filename
         }
         if (data) {
             return response.json({
                 success: true,
                 message: "Update events successfully",
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e){
+    } catch (e) {
         errorHandler(response, e)
     }
 }
@@ -81,13 +80,12 @@ exports.deleteEvents = async (request, response) => {
             return response.json({
                 success: true,
                 message: `Delete events ${request.params.id} successfully`,
-                result: data
+                result: data,
             })
         } else {
             throw Error("not_found")
         }
-    } catch(e) {
+    } catch (e) {
         errorHandler(response, e)
     }
 }
- 
