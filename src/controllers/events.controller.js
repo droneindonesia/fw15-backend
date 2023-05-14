@@ -26,7 +26,7 @@ exports.getEvent = async (req, res) => {
         const data = await eventsModel.findEvent(
             req.query.page,
             req.query.limit,
-            req.query.search,
+            req.query.name,
             req.query.sort,
             req.query.sortBy,
             req.query.category,
