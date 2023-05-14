@@ -74,6 +74,16 @@ const errorHandler = (response, e) => {
             success: false,
             message: "Profile not found",
         })
+    } else if (e?.message?.includes("already in use")) {
+        return response.status(404).json({
+            success: false,
+            message: "Email is already in use",
+        })
+    } else if (e?.message?.includes("is not match")) {
+        return response.status(404).json({
+            success: false,
+            message: "Confirm Password is not match",
+        })
     } else if (e?.message?.includes("Event is not found")) {
         return response.status(404).json({
             success: false,
