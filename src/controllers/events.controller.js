@@ -79,7 +79,7 @@ exports.createEvent = async (req, res) => {
         const event = await eventsModel.insert(data)
         const eventCategories = {
             eventId: event.id,
-            categoryId: data.categoryId,
+            categoryId: req.body.categoryId,
         }
 
         await eventCategoriesModel.insert(eventCategories)
