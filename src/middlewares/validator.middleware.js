@@ -25,26 +25,6 @@ const checkDuplicatePass = body("confirmPassword").custom((value, { req }) => {
     return value === req.body.password
 })
 
-const validator = (req, res, next) => {
-    const errors = validationResult(req)
-    try {
-        if (!errors.isEmpty()) {
-            fileRemover(req.file)
-            return res.json({
-                results: errors,
-            })
-        }
-        return next()
-    } catch (e) {
-        console.log(e)
-        return res.status(400).json({
-            success: false,
-            message: "Validation error",
-            results: errors.array(),
-        })
-    }
-}
-
 const rules = {
     authLogin: [emailFormat, checkPassword],
     authRegister: [
@@ -247,6 +227,23 @@ const rules = {
         param("id").optional().isInt().withMessage("id should be a number"),
     ],
     Delete: [param("id").optional().isInt().withMessage("id should be number")],
+}
+
+const validator = (req, res, next) => {
+    const errors = validationResult(req)
+    try {
+        if (!errors.isEmpty()) {
+            fileRemover(req.file)
+            throw Error("Validation rules")
+        }
+        return next()
+    } catch (e) {
+        return res.status(400).json({
+            success: false,
+            message: "Validation error",
+            results: errors.array(),
+        })
+    }
 }
 
 const validate = (selectedrules) => [rules[selectedrules], validator]
