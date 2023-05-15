@@ -79,10 +79,10 @@ const errorHandler = (response, e) => {
             success: false,
             message: "Email is already in use",
         })
-    } else if (e?.message?.includes("is not match")) {
+    } else if (e?.message?.includes("unauthorized")) {
         return response.status(404).json({
             success: false,
-            message: "Confirm Password is not match",
+            message: "Unauthorized, you must login first",
         })
     } else if (e?.message?.includes("Event is not found")) {
         return response.status(404).json({

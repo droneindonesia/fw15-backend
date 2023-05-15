@@ -30,11 +30,7 @@ exports.login = async (request, response) => {
 
 exports.register = async (request, response) => {
     try {
-        const { fullName, password, confirmPassword } = request.body
-        if (password !== confirmPassword) {
-            throw Error("Confirm Password is not match")
-        }
-
+        const { fullName, password } = request.body
         const checkEmail = await usersModel.findOneByEmail(request.body.email)
 
         if (checkEmail) {
