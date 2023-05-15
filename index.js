@@ -12,17 +12,10 @@ const cors = require("cors")
 
 app.use(
     cors({
-        origin: "https://fahmi-fw15-frontend.netlify.app",
+        origin: process.env.CORS,
         optionsSuccessStatus: 200,
     })
 )
-
-/* app.use(
-    cors({
-        origin: "http://localhost:5173",
-        optionsSuccessStatus: 200,
-    })
-) */
 
 app.use("/", require("./src/routers/index"))
 
