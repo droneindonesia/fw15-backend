@@ -51,7 +51,7 @@ exports.register = async (request, response) => {
         const token = jwt.sign({ id: user.id }, APP_SECRET)
         return response.json({
             success: true,
-            message: "Register success!",
+            message: "Register success!, you'll be redirected in seconds",
             results: { token },
         })
     } catch (e) {
@@ -90,6 +90,12 @@ exports.resetPassword = async (request, response) => {
     try {
         const { code, email, password } = request.body
         const find = await forgotRequestModel.findOneByCodeAndEmail(email, code)
+        const checkCode = await forgotRequestModel.findOneByCode(code)
+
+        if (!checkCode) {
+            throw Error("Code is invalid")
+        }
+
         if (!find) {
             throw Error("no_forgot_request")
         }

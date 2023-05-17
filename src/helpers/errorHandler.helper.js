@@ -64,6 +64,11 @@ const errorHandler = (response, e) => {
             success: false,
             message: "Reservation is not found",
         })
+    } else if (e?.message?.includes("Code is invalid")) {
+        return response.status(404).json({
+            success: false,
+            message: "Code is invalid",
+        })
     } else if (e?.message?.includes("Update profile failed")) {
         return response.status(404).json({
             success: false,
