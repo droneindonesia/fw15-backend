@@ -30,7 +30,9 @@ exports.login = async (request, response) => {
 
 exports.register = async (request, response) => {
     try {
-        const { fullName, password } = request.body
+        const fullName = request.body.fullName
+        const username = request.body.fullName
+        const password = request.body.password
         const checkEmail = await usersModel.findOneByEmail(request.body.email)
 
         if (checkEmail) {
@@ -40,6 +42,7 @@ exports.register = async (request, response) => {
         const hash = await argon.hash(password)
         const data = {
             ...request.body,
+            username,
             password: hash,
         }
         const user = await usersModel.insert(data)

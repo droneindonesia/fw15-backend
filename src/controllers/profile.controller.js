@@ -1,11 +1,13 @@
 const fileRemover = require("../helpers/fileremover.helper")
 const profileModel = require("../models/admin/profile.model")
+const usersModel = require("../models/admin/users.model")
 const errorHandler = require("../helpers/errorHandler.helper")
 
 exports.updateProfile = async (req, res) => {
     try {
         const { id } = req.user
         const user = await profileModel.findOneByUserId(id)
+        const users = { username: req.body.username }
         const data = {
             ...req.body,
         }
@@ -16,6 +18,7 @@ exports.updateProfile = async (req, res) => {
             data.picture = req.file.filename
         }
         const profile = await profileModel.updatebyUserId(id, data)
+        await usersModel.update(id, users)
         if (!profile) {
             throw Error("Update profile failed")
         }
