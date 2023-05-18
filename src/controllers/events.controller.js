@@ -9,25 +9,6 @@ exports.getAllEvents = async (req, res) => {
             req.query.limit,
             req.query.search,
             req.query.sort,
-            req.query.sortBy
-        )
-        return res.json({
-            success: true,
-            message: "List of all events",
-            results: data,
-        })
-    } catch (err) {
-        return errorHandler(res, err)
-    }
-}
-
-exports.getEvent = async (req, res) => {
-    try {
-        const data = await eventsModel.findEvent(
-            req.query.page,
-            req.query.limit,
-            req.query.name,
-            req.query.sort,
             req.query.sortBy,
             req.query.category,
             req.query.location
@@ -44,7 +25,7 @@ exports.getEvent = async (req, res) => {
 
 exports.getEventsById = async (req, res) => {
     try {
-        let data = await eventsModel.findEventsByUser(req.params.id)
+        let data = await eventsModel.findOne(req.params.id)
         return res.json({
             success: true,
             message: "Get one events successfully",
@@ -55,10 +36,11 @@ exports.getEventsById = async (req, res) => {
     }
 }
 
-exports.getEvents = async (req, res) => {
+exports.getEventsByUser = async (req, res) => {
     try {
         const { id } = req.user
-        let getEvents = await eventsModel.findEventsByUser(id)
+        const getEvents = await eventsModel.findOne(id)
+
         return res.json({
             success: true,
             message: "List event that you get",
@@ -74,7 +56,9 @@ exports.createEvent = async (req, res) => {
         if (req.file) {
             req.body.picture = req.file.filename
         }
+
         const { id } = req.user
+
         let data = { ...req.body, createdBy: id }
         const event = await eventsModel.insert(data)
         const eventCategories = {

@@ -4,9 +4,7 @@ const validate = require("../middlewares/validator.middleware")
 const uploadMiddleware = require("../middlewares/upload.middleware")
 const authMiddleware = require("../middlewares/auth.middleware")
 
-eventsRouter.get("/", validate("getAll"), eventsController.getEvent)
-eventsRouter.get("/manage", authMiddleware, eventsController.getEvents)
-eventsRouter.get("/:id", eventsController.getEventsById)
+eventsRouter.get("/manage", authMiddleware, eventsController.getEventsByUser)
 eventsRouter.post(
     "/manage",
     authMiddleware,
@@ -22,5 +20,7 @@ eventsRouter.patch(
     eventsController.updateEvents
 )
 eventsRouter.delete("/manage/:id", authMiddleware, eventsController.destroy)
+eventsRouter.get("/", validate("getAll"), eventsController.getAllEvents)
+eventsRouter.get("/:id", eventsController.getEventsById)
 
 module.exports = eventsRouter
