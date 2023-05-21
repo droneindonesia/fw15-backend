@@ -46,9 +46,69 @@ exports.findAll = async function (
     return rows
 }
 
+exports.findAllByUserId = async function (
+    page,
+    limit,
+    search,
+    sort,
+    sortBy,
+    category,
+    location,
+    id
+) {
+    page = parseInt(page) || 1
+    limit = parseInt(limit) || 5
+    search = search || ""
+    sort = sort || "id"
+    sortBy = sortBy || "ASC"
+    category = category || ""
+    location = location || ""
+
+    const offset = (page - 1) * limit
+    const query = `
+    SELECT
+    "e"."id",
+    "e"."picture",
+    "e"."title",
+    "e"."date",
+    "c"."name" as "category",
+    "city"."name" as "location"
+    FROM "eventCategories" "ec"
+    JOIN "events" "e" ON "e"."id" = "ec"."eventId"
+    JOIN "categories" "c" ON "c"."id" = "ec"."categoryId"
+    JOIN "cities" "city" ON "city"."id" = "e"."cityId"
+    WHERE "e"."title" LIKE $3 AND "c"."name" LIKE $4 AND "city"."name" LIKE $5 AND "e"."createdBy" = $6
+    ORDER BY "${sort}" ${sortBy} LIMIT $1 OFFSET $2
+    `
+
+    const values = [
+        limit,
+        offset,
+        `%${search}%`,
+        `%${category}%`,
+        `%${location}%`,
+        id,
+    ]
+    const { rows } = await db.query(query, values)
+
+    return rows
+}
+
 exports.findOne = async function (id) {
     const query = `
-    SELECT * FROM "events" WHERE "createdBy"=$1
+    SELECT 
+    "e"."id",
+    "e"."picture",
+    "e"."title",
+    "e"."date",
+    "e"."description",
+    "ci"."name" AS "location",
+    "cat"."name" AS "category"
+    FROM "eventCategories" "ec"
+    JOIN "events" "e" ON "e"."id" = "ec"."eventId"
+    JOIN "categories" "cat" ON "cat"."id" = "ec"."categoryId"
+    JOIN "cities" "ci" ON "ci"."id" = "e"."cityId"
+    WHERE "e"."id" = $1;
     `
 
     const values = [id]

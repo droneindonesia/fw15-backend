@@ -28,6 +28,16 @@ exports.findOne = async function (id) {
     return rows[0]
 }
 
+exports.findAllPayment = async function () {
+    const query = `
+    SELECT * FROM "paymentMethod"
+    `
+
+    const values = []
+    const { rows } = await db.query(query, values)
+    return rows
+}
+
 exports.insert = async function (data) {
     const query = `
     INSERT INTO "paymentMethod" ("name") 

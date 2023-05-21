@@ -12,5 +12,9 @@ reservationsRouter.post(
     validate("reservationsticket"),
     reservationsController.makeTicket
 )
+reservationsRouter.get(
+    "/sections",
+    reservationsController.getReservationSection
+)
 
 module.exports = reservationsRouter

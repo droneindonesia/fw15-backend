@@ -23,12 +23,23 @@ exports.getAllEvents = async (req, res) => {
     }
 }
 
-exports.getEventsById = async (req, res) => {
+exports.getAllEventsByUserId = async (req, res) => {
     try {
-        let data = await eventsModel.findOne(req.params.id)
+        const { id: userId } = req.user
+        console.log(userId)
+        let data = await eventsModel.findAllByUserId(
+            req.query.page,
+            req.query.limit,
+            req.query.search,
+            req.query.sort,
+            req.query.sortBy,
+            req.query.category,
+            req.query.location,
+            userId
+        )
         return res.json({
             success: true,
-            message: "Get one events successfully",
+            message: "List of all events",
             results: data,
         })
     } catch (err) {
@@ -36,15 +47,13 @@ exports.getEventsById = async (req, res) => {
     }
 }
 
-exports.getEventsByUser = async (req, res) => {
+exports.getEventsByParamsId = async (req, res) => {
     try {
-        const { id } = req.user
-        const getEvents = await eventsModel.findOne(id)
-
+        let data = await eventsModel.findOne(req.params.id)
         return res.json({
             success: true,
-            message: "List event that you get",
-            results: getEvents,
+            message: "Get one events successfully",
+            results: data,
         })
     } catch (err) {
         return errorHandler(res, err)
@@ -86,6 +95,13 @@ exports.updateEvents = async (req, res) => {
         const { id } = req.user
         const data = { ...req.body }
         const event = await eventsModel.update(id, data)
+
+        const eventCategories = {
+            eventId: event.id,
+            categoryId: req.body.categoryId,
+        }
+
+        await eventCategoriesModel.update(id, eventCategories)
 
         return res.json({
             success: true,

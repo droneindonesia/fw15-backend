@@ -7,7 +7,7 @@ exports.updateProfile = async (req, res) => {
     try {
         const { id } = req.user
         const user = await profileModel.findOneByUserId(id)
-        const users = { username: req.body.username }
+        const users = { username: req.body.username, email: req.body.email }
         const data = {
             ...req.body,
         }
@@ -17,15 +17,15 @@ exports.updateProfile = async (req, res) => {
             }
             data.picture = req.file.filename
         }
-        const profile = await profileModel.updatebyUserId(id, data)
-        await usersModel.update(id, users)
-        if (!profile) {
+        const profileUpdate = await profileModel.updatebyUserId(id, data)
+        const usersUpdate = await usersModel.update(id, users)
+        if (!profileUpdate) {
             throw Error("Update profile failed")
         }
         return res.json({
             success: true,
             message: "Profile updated",
-            result: profile,
+            result: { profileUpdate, usersUpdate },
         })
     } catch (e) {
         return errorHandler(res, e)

@@ -1,6 +1,20 @@
 const errorHandler = require("../helpers/errorHandler.helper")
 const reservationModel = require("../models/admin/reservations.model")
 const reservationTicketModel = require("../models/admin/reservationsticket.model")
+const paymentMethodModel = require("../models/admin/paymentmethod.model")
+
+exports.getPayments = async (req, res) => {
+    try {
+        const data = await paymentMethodModel.findAllPayment()
+        return res.json({
+            success: true,
+            message: "Get all payment successfully",
+            results: data,
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
 
 exports.createPayments = async (req, res) => {
     try {

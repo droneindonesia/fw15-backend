@@ -3,6 +3,24 @@ const errorHandler = require("../helpers/errorHandler.helper")
 const eventsModel = require("../models/admin/events.model")
 const reservationsTicketModel = require("../models/admin/reservationsticket.model")
 
+exports.getReservationSection = async (req, res) => {
+    try {
+        const { id } = req.user
+        if (!id) {
+            throw Error("Unauthorized")
+        }
+
+        const reservation = await reservationsModel.getReservations()
+        return res.json({
+            success: true,
+            message: "Add reservations successfully",
+            results: reservation,
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
+
 exports.createReservations = async (req, res) => {
     try {
         const { id } = req.user

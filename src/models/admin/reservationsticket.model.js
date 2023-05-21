@@ -20,19 +20,19 @@ exports.findAll = async function (page, limit, sort, sortBy) {
 exports.getInfo = async (id) => {
     const queries = `
     SELECT
-    "e"."title" AS "eventName",
-    "rs"."name" AS "TicketSection",
-    "rs"."price" AS "price",
-    "rt"."quantity" AS "quantity",
-    "rsta"."name" AS "reservationStatus",
-    "pm"."name" AS "paymentMethod"
+    "e"."title" AS "Event",
+    "rs"."name" AS "Section",
+    "rs"."price" AS "Price",
+    "rt"."quantity" AS "Quantity",
+    "rsta"."name" AS "Status",
+    "pm"."name" AS "Payment Method"
     FROM "reservationsTickets" "rt"
     INNER JOIN "reservationSections" "rs" ON "rs"."id" = "rt"."sectionId"
     INNER JOIN "reservations" "r" ON "r"."id" = "rt"."reservationId"
     INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
     INNER JOIN "reservationStatus" "rsta" ON "rsta"."id" = "r"."statusId"
     INNER JOIN "paymentMethod" "pm" ON "pm"."id" = "r"."paymentMethodId"
-    WHERE "r"."id" = $1
+    WHERE "r"."userId" = $1
     `
     const values = [id]
     const { rows } = await db.query(queries, values)

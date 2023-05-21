@@ -17,9 +17,18 @@ exports.findAll = async function (page, limit, sort, sortBy) {
     return rows
 }
 
+exports.getReservations = async function () {
+    const query = `
+    SELECT * FROM "reservationSections"
+    `
+
+    const { rows } = await db.query(query)
+    return rows
+}
+
 exports.findOne = async function (id) {
     const query = `
-    SELECT * FROM "reservations" WHERE id=$1
+    SELECT * FROM "reservations" WHERE "userId"=$1
     `
 
     const values = [id]
@@ -43,12 +52,12 @@ exports.findOneByUserId = async (userId) => {
     return rows[0]
 }
 
-exports.findByIdAndUserId = async (id, userId) => {
+exports.findByIdAndUserId = async (userId) => {
     const queries = `
     SELECT * FROM "reservations"
-    WHERE "id" = $1 AND "userId" = $2
+    WHERE "userId" = $1
     `
-    const values = [id, userId]
+    const values = [userId]
     const { rows } = await db.query(queries, values)
     return rows[0]
 }
