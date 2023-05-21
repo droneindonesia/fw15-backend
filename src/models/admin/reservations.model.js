@@ -49,7 +49,7 @@ exports.findOneByUserId = async (userId) => {
     `
     const values = [userId]
     const { rows } = await db.query(query, values)
-    return rows[0]
+    return rows
 }
 
 exports.findByIdAndUserId = async (userId) => {

@@ -58,9 +58,7 @@ exports.makeTicket = async (req, res) => {
 
         const data = { ...req.body }
 
-        const reservation = await reservationsModel.findByIdAndUserId(
-            data.reservationId
-        )
+        const reservation = await reservationsModel.findByIdAndUserId(id)
 
         if (!reservation) {
             throw Error("Reservation is not found")
