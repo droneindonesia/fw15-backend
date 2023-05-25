@@ -26,7 +26,6 @@ exports.getAllEvents = async (req, res) => {
 exports.getAllEventsByUserId = async (req, res) => {
     try {
         const { id: userId } = req.user
-        console.log(userId)
         let data = await eventsModel.findAllByUserId(
             req.query.page,
             req.query.limit,
