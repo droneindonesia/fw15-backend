@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4b250918-9a07-4563-8549-6a333e5f9aa6",
+		"_postman_id": "84f44677-003e-4de8-9185-773c03813f6e",
 		"name": "fw15-backend",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26558441"
 	},
 	"item": [
 		{
@@ -2387,7 +2388,7 @@
 								},
 								{
 									"key": "password",
-									"value": "KataSandiBaru1234#",
+									"value": "MiseryBeats1234#",
 									"type": "default"
 								}
 							]
@@ -2724,11 +2725,11 @@
 												{
 													"key": "picture",
 													"type": "file",
-													"src": "/C:/Users/itmam/Downloads/f10ff70a7155e5ab666bcdd1b45b726d.jpg"
+													"src": "/C:/Users/itmam/Downloads/cc7fd6e1c909ed07672542e05176719a.jpg"
 												},
 												{
 													"key": "title",
-													"value": "Konser Lady Gaga",
+													"value": "Inner Varnika",
 													"type": "default"
 												},
 												{
@@ -2738,13 +2739,18 @@
 												},
 												{
 													"key": "cityId",
-													"value": "5",
+													"value": "2",
 													"type": "default"
 												},
 												{
 													"key": "description",
 													"value": "Lorem ipsum dolor sit amet",
 													"type": "default"
+												},
+												{
+													"key": "categoryId",
+													"value": "1",
+													"type": "text"
 												}
 											]
 										},
@@ -3075,7 +3081,7 @@
 									"urlencoded": [
 										{
 											"key": "eventId",
-											"value": "1",
+											"value": "3",
 											"type": "default"
 										}
 									]
@@ -3087,6 +3093,30 @@
 									],
 									"path": [
 										"wishlist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DELETE WISHLIST",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/wishlist/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wishlist",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
 									]
 								}
 							},
