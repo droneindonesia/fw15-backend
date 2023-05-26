@@ -8,5 +8,6 @@ wishlistRouter.post(
     validate("manageWishlist"),
     wishlistController.makeWishlist
 )
+wishlistRouter.delete("/:id", wishlistController.deleteWishlist)
 
 module.exports = wishlistRouter

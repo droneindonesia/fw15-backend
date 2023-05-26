@@ -30,7 +30,7 @@ exports.findOne = async function (id) {
 exports.findOneById = async (userId) => {
     const query = `
     SELECT 
-    "e"."id",
+    "w"."id",
     "e"."title",
     "e"."date",
     "c"."name" AS "location",

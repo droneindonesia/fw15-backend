@@ -38,3 +38,22 @@ exports.makeWishlist = async (req, res) => {
         return errorHandler(res, err)
     }
 }
+
+exports.deleteWishlist = async (req, res) => {
+    try {
+        const { id } = req.user
+
+        if (!id) {
+            throw Error("Unauthorized")
+        }
+
+        let data = await wishlistModel.destroy(req.params.id)
+        return res.json({
+            success: true,
+            message: "Delete wishlist successfully",
+            results: data,
+        })
+    } catch (err) {
+        return errorHandler(res, err)
+    }
+}
