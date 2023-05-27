@@ -17,7 +17,7 @@ eventsRouter.post(
     eventsController.createEvent
 )
 eventsRouter.patch(
-    "/manage",
+    "/manage/:id",
     authMiddleware,
     uploadMiddleware("picture"),
     validate("events"),

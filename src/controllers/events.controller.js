@@ -92,8 +92,14 @@ exports.updateEvents = async (req, res) => {
             req.body.picture = req.file.filename
         }
         const { id } = req.user
+
+        if (!id) {
+            throw Error("Unauthorized")
+        }
+
+        const eventId = req.params.id
         const data = { ...req.body }
-        const event = await eventsModel.update(id, data)
+        const event = await eventsModel.update(eventId, id, data)
 
         const eventCategories = {
             eventId: event.id,

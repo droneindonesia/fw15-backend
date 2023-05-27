@@ -74,7 +74,7 @@ exports.findAllByUserId = async function (
     "c"."name" as "category",
     "city"."name" as "location"
     FROM "eventCategories" "ec"
-    JOIN "events" "e" ON "e"."id" = "ec"."eventId"
+    JOIN "events" "e" ON "e"."id" = "ec"."id"
     JOIN "categories" "c" ON "c"."id" = "ec"."categoryId"
     JOIN "cities" "city" ON "city"."id" = "e"."cityId"
     WHERE "e"."title" LIKE $3 AND "c"."name" LIKE $4 AND "city"."name" LIKE $5 AND "e"."createdBy" = $6
@@ -134,10 +134,10 @@ exports.insert = async function (data) {
     return rows[0]
 }
 
-exports.update = async function (id, data) {
+exports.update = async function (id, userId, data) {
     const query = `
     UPDATE "events" 
-    SET "picture"=$2, "title"=$3, "date"=$4, "cityId"=$5, "description"=$6
+    SET "picture"=$2, "title"=$3, "date"=$4, "cityId"=$5, "description"=$6, "createdBy"=$7
     WHERE "id" = $1
     RETURNING *
     `
@@ -149,6 +149,7 @@ exports.update = async function (id, data) {
         data.date,
         data.cityId,
         data.description,
+        userId,
     ]
     const { rows } = await db.query(query, values)
     return rows[0]
