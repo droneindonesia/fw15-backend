@@ -32,6 +32,7 @@ exports.createReservations = async (req, res) => {
         const data = { userId: id, ...req.body }
 
         const checkEvent = await eventsModel.findOne(req.body.eventId)
+        const { title } = checkEvent
 
         if (!checkEvent) {
             throw Error("Event is not found")
@@ -41,7 +42,7 @@ exports.createReservations = async (req, res) => {
         return res.json({
             success: true,
             message: "Add reservations successfully",
-            results: reservation,
+            results: { reservation, title },
         })
     } catch (err) {
         return errorHandler(res, err)
