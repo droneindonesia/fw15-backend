@@ -1,11 +1,15 @@
 const fileRemover = require("../helpers/fileremover.helper")
 const profileModel = require("../models/admin/profile.model")
 const usersModel = require("../models/admin/users.model")
+const cloudinary = require("cloudinary").v2
 const errorHandler = require("../helpers/errorHandler.helper")
 
 exports.updateProfile = async (req, res) => {
     try {
         const { id } = req.user
+        const profile = await profileModel.findOne(req.params.id)
+        await cloudinary.uploader.destroy(profile.picture)
+
         const user = await profileModel.findOneByUserId(id)
         const users = { username: req.body.username, email: req.body.email }
         const data = {

@@ -56,7 +56,9 @@ exports.createcities = async (request, response) => {
 
 exports.updatecities = async (request, response) => {
     try {
+        const cities = await citiesModel.findOne(request.params.id)
         const data = await citiesModel.update(request.params.id, request.body)
+        await cloudinary.uploader.destroy(cities.picture)
         if (request.file) {
             request.body.picture = request.file.filename
         }

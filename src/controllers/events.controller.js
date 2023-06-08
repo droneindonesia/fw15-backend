@@ -93,7 +93,8 @@ exports.updateEvents = async (req, res) => {
             req.body.picture = req.file.filename
         }
         const { id } = req.user
-
+        const events = await eventsModel.findOne(req.params.id)
+        await cloudinary.uploader.destroy(events.picture)
         if (!id) {
             throw Error("Unauthorized")
         }

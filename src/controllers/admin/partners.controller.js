@@ -57,6 +57,8 @@ exports.createPartners = async (request, response) => {
 exports.updatePartners = async (request, response) => {
     try {
         const data = await partnersModel.update(request.params.id, request.body)
+        const partners = await partnersModel.findOne(request.params.id)
+        await cloudinary.uploader.destroy(partners.picture)
         if (request.file) {
             request.body.picture = request.file.filename
         }
