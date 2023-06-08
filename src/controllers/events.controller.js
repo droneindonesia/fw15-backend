@@ -125,6 +125,7 @@ exports.destroy = async (req, res) => {
             throw Error("Unauthorized")
         }
         const data = await eventsModel.destroy(req.params.id)
+        await eventCategoriesModel.destroy(req.params.id)
         return res.json({
             success: true,
             message: "Delete events successfully",
