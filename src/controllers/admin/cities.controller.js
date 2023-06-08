@@ -1,5 +1,6 @@
 const citiesModel = require("../../models/admin/cities.model")
 const errorHandler = require("../../helpers/errorHandler.helper")
+const cloudinary = require("cloudinary").v2
 
 exports.getAllcities = async (request, response) => {
     try {
@@ -75,7 +76,9 @@ exports.updatecities = async (request, response) => {
 
 exports.deletecities = async (request, response) => {
     try {
+        const cities = await citiesModel.findOne(request.params.id)
         const data = await citiesModel.destroy(request.params.id)
+        await cloudinary.uploader.destroy(cities.picture)
         if (data) {
             return response.json({
                 success: true,

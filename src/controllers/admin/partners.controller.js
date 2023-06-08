@@ -1,5 +1,6 @@
 const partnersModel = require("../../models/admin/partners.model")
 const errorHandler = require("../../helpers/errorHandler.helper")
+const cloudinary = require("cloudinary").v2
 
 exports.getAllPartners = async (request, response) => {
     try {
@@ -75,7 +76,9 @@ exports.updatePartners = async (request, response) => {
 
 exports.deletePartners = async (request, response) => {
     try {
+        const partners = await partnersModel.findOne(request.params.id)
         const data = await partnersModel.destroy(request.params.id)
+        await cloudinary.uploader.destroy(partners.picture)
         if (data) {
             return response.json({
                 success: true,
