@@ -9,6 +9,7 @@ Built using Express.js to make an API, PostgreSQL for database
 Install fw15-backend with npm
 
 ```bash
+  git clone https://github.com/fahmipraga/fw15-backend
   cd fw15-backend
   npm install 
   npm run dev
