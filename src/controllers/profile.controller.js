@@ -7,8 +7,6 @@ const errorHandler = require("../helpers/errorHandler.helper")
 exports.updateProfile = async (req, res) => {
     try {
         const { id } = req.user
-        const profile = await profileModel.findOne(req.params.id)
-        await cloudinary.uploader.destroy(profile.picture)
 
         const user = await profileModel.findOneByUserId(id)
         const users = { username: req.body.username, email: req.body.email }
@@ -20,6 +18,8 @@ exports.updateProfile = async (req, res) => {
                 fileRemover({ filename: user.picture })
             }
             data.picture = req.file.filename
+            const profile = await profileModel.findOne(id)
+            await cloudinary.uploader.destroy(profile.picture)
         }
         const profileUpdate = await profileModel.updatebyUserId(id, data)
         const usersUpdate = await usersModel.update(id, users)
