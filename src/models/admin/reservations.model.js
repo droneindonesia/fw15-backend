@@ -39,6 +39,7 @@ exports.findOne = async function (id) {
 exports.findOneByUserId = async (userId) => {
     const query = `
     SELECT
+    "r"."id",
     "e"."title",
     "c"."name",
     "e"."date"
