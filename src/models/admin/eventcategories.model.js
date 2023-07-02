@@ -38,10 +38,10 @@ exports.insert = async function (data) {
     return rows[0]
 }
 
-exports.update = async function (id, data) {
+exports.update = async function (data) {
     const query = `
     UPDATE "eventCategories" 
-    SET "eventId"=$1, "categoryId"=$3
+    SET "categoryId"=$2
     WHERE "eventId" = $1
     RETURNING *
     `

@@ -108,7 +108,7 @@ exports.updateEvents = async (req, res) => {
             categoryId: req.body.categoryId,
         }
 
-        await eventCategoriesModel.update(id, eventCategories)
+        await eventCategoriesModel.update(eventCategories)
 
         return res.json({
             success: true,
