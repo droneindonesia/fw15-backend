@@ -1,8 +1,6 @@
-const router = require("express").Router()
+const deviceTokenRouter = require("express").Router()
 const deviceTokenController = require("../controllers/deviceToken.controller")
 
-const deviceTokenRouter = router()
-
-deviceTokenRouter.post("/device-token", deviceTokenController)
+deviceTokenRouter.post("/device-token", deviceTokenController.saveToken)
 
 module.exports = deviceTokenRouter
