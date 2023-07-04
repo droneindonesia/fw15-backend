@@ -38,15 +38,15 @@ exports.insert = async function (data) {
     return rows[0]
 }
 
-exports.update = async function (id, data) {
+exports.update = async function (data) {
     const query = `
     UPDATE "eventCategories" 
-    SET "eventId"=$2, "categoryId"=$3
-    WHERE "id" = $1
+    SET "categoryId"=$2
+    WHERE "eventId" = $1
     RETURNING *
     `
 
-    const values = [id, data.eventId, data.categoryId]
+    const values = [data.eventId, data.categoryId]
     const { rows } = await db.query(query, values)
     return rows[0]
 }

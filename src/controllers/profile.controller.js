@@ -1,11 +1,13 @@
 const fileRemover = require("../helpers/fileremover.helper")
 const profileModel = require("../models/admin/profile.model")
 const usersModel = require("../models/admin/users.model")
+const cloudinary = require("cloudinary").v2
 const errorHandler = require("../helpers/errorHandler.helper")
 
 exports.updateProfile = async (req, res) => {
     try {
         const { id } = req.user
+
         const user = await profileModel.findOneByUserId(id)
         const users = { username: req.body.username, email: req.body.email }
         const data = {
@@ -16,6 +18,8 @@ exports.updateProfile = async (req, res) => {
                 fileRemover({ filename: user.picture })
             }
             data.picture = req.file.filename
+            const profile = await profileModel.findOne(id)
+            await cloudinary.uploader.destroy(profile.picture)
         }
         const profileUpdate = await profileModel.updatebyUserId(id, data)
         const usersUpdate = await usersModel.update(id, users)

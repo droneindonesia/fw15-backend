@@ -1,6 +1,7 @@
 const errorHandler = require("../helpers/errorHandler.helper")
 const eventsModel = require("../models/admin/events.model")
 const eventCategoriesModel = require("../models/admin/eventcategories.model")
+const cloudinary = require("cloudinary").v2
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -92,7 +93,8 @@ exports.updateEvents = async (req, res) => {
             req.body.picture = req.file.filename
         }
         const { id } = req.user
-
+        const events = await eventsModel.findOne(req.params.id)
+        await cloudinary.uploader.destroy(events.picture)
         if (!id) {
             throw Error("Unauthorized")
         }
@@ -106,7 +108,7 @@ exports.updateEvents = async (req, res) => {
             categoryId: req.body.categoryId,
         }
 
-        await eventCategoriesModel.update(id, eventCategories)
+        await eventCategoriesModel.update(eventCategories)
 
         return res.json({
             success: true,
@@ -124,7 +126,10 @@ exports.destroy = async (req, res) => {
         if (!id) {
             throw Error("Unauthorized")
         }
+        const events = await eventsModel.findOne(req.params.id)
         const data = await eventsModel.destroy(req.params.id)
+        await cloudinary.uploader.destroy(events.picture)
+        await eventCategoriesModel.destroy(req.params.id)
         return res.json({
             success: true,
             message: "Delete events successfully",

@@ -1,5 +1,6 @@
 const profileModel = require("../../models/admin/profile.model")
 const errorHandler = require("../../helpers/errorHandler.helper")
+const cloudinary = require("cloudinary").v2
 
 exports.getAllProfile = async (request, response) => {
     try {
@@ -72,7 +73,9 @@ exports.updateProfile = async (request, response) => {
 
 exports.deleteProfile = async (request, response) => {
     try {
+        const profile = await profileModel.findOne(request.params.id)
         const data = await profileModel.destroy(request.params.id)
+        await cloudinary.uploader.destroy(profile.picture)
         if (data) {
             return response.json({
                 success: true,
