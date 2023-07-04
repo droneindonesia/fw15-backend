@@ -17,6 +17,7 @@ router.use(
     require("./changepassword.router")
 )
 router.use("/wishlist", authMiddleware, require("./wishlist.router.js"))
+router.use("/device-token", authMiddleware, require("./deviceToken.router"))
 
 router.get("/", (request, response) => {
     return response.status(200).json({
