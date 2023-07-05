@@ -1,5 +1,5 @@
 require("dotenv").config({
-    path: ".env",
+  path: ".env",
 })
 
 const express = require("express")
@@ -11,14 +11,14 @@ const PORT = process.env.PORT
 const cors = require("cors")
 
 app.use(
-    cors({
-        origin: process.env.CORS,
-        optionsSuccessStatus: 200,
-    })
+  cors({
+    origin: process.env.CORS,
+    optionsSuccessStatus: 200,
+  })
 )
 
 app.use("/", require("./src/routers/index"))
 
 app.listen(PORT, () => {
-    console.log(`App is listening on ${PORT}`)
+  console.log(`App is listening on ${PORT}`)
 })

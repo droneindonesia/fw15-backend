@@ -5,12 +5,7 @@ const uploadMiddleware = require("../../middlewares/upload.middleware")
 
 citiesRouter.get("/", validate("getAll"), citiesController.getAllcities)
 citiesRouter.get("/:id", validate("getOne"), citiesController.getOneCities)
-citiesRouter.post(
-    "/",
-    uploadMiddleware("picture"),
-    validate("cities"),
-    citiesController.createcities
-)
+citiesRouter.post("/", uploadMiddleware("picture"), validate("cities"), citiesController.createcities)
 citiesRouter.patch("/:id", validate("Update"), citiesController.updatecities)
 citiesRouter.delete("/:id", validate("Delete"), citiesController.deletecities)
 
