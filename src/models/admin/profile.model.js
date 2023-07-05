@@ -11,7 +11,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
   const offset = (page - 1) * limit
   const query = `
-  SELECT * FROM ${table} WHERE "fullName" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+  SELECT * FROM "${table}" WHERE "fullName" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
   `
 
   const values = [limit, offset, `%${search}%`]
@@ -22,7 +22,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
 exports.findOne = async function (id) {
   const query = `
-  SELECT * FROM ${table} WHERE id=$1
+  SELECT * FROM "${table}" WHERE id=$1
   `
 
   const values = [id]
@@ -45,7 +45,7 @@ exports.findOneByUserId = async function (userId) {
   "p"."birthDate",
   "p"."createdAt",
   "p"."updatedAt"
-  FROM ${table} "p"
+  FROM "${table}" "p"
   JOIN "users" "u" ON "u"."id" = "p"."userId"
   WHERE "p"."userId"=$1
   `
@@ -57,7 +57,7 @@ exports.findOneByUserId = async function (userId) {
 
 exports.insert = async function (data) {
   const query = `
-  INSERT INTO ${table} ("userId", "picture", "fullName", "phoneNumber", "gender", "profession", "nationality", "birthDate") 
+  INSERT INTO "${table}" ("userId", "picture", "fullName", "phoneNumber", "gender", "profession", "nationality", "birthDate") 
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
   `
 
@@ -77,7 +77,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, data) {
   const query = `
-  UPDATE ${table} 
+  UPDATE "${table}" 
   SET 
   "userId"=COALESCE(NULLIF($2::INTEGER, NULL), "userId"),
   "picture"=COALESCE(NULLIF($3, ''), "picture"), 
@@ -108,7 +108,7 @@ exports.update = async function (id, data) {
 
 exports.updatebyUserId = async function (userId, data) {
   const query = `
-  UPDATE ${table} 
+  UPDATE "${table}" 
   SET "picture"=COALESCE(NULLIF($2, ''), "picture"), 
   "fullName"=COALESCE(NULLIF($3, ''), "fullName"),
   "phoneNumber"=COALESCE(NULLIF($4, ''), "phoneNumber"),
@@ -136,7 +136,7 @@ exports.updatebyUserId = async function (userId, data) {
 
 exports.destroy = async function (id) {
   const query = `
-  DELETE FROM ${table} 
+  DELETE FROM "${table}" 
   WHERE "id"=$1
   RETURNING *
   `

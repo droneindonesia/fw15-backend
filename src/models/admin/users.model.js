@@ -11,7 +11,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
   const offset = (page - 1) * limit
   const query = `
-  SELECT * FROM ${table} WHERE "email" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+  SELECT * FROM "${table}" WHERE "email" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
   `
 
   const values = [limit, offset, `%${search}%`]
@@ -22,7 +22,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
 exports.findOne = async function (id) {
   const query = `
-  SELECT * FROM ${table} WHERE id=$1
+  SELECT * FROM "${table}" WHERE id=$1
   `
 
   const values = [id]
@@ -32,7 +32,7 @@ exports.findOne = async function (id) {
 
 exports.findOneByEmail = async function (email) {
   const query = `
-  SELECT * FROM ${table} WHERE email=$1
+  SELECT * FROM "${table}" WHERE email=$1
   `
 
   const values = [email]
@@ -42,7 +42,7 @@ exports.findOneByEmail = async function (email) {
 
 exports.findOneByUsername = async function (username) {
   const query = `
-  SELECT * FROM ${table} WHERE username=$1
+  SELECT * FROM "${table}" WHERE username=$1
   `
 
   const values = [username]
@@ -52,7 +52,7 @@ exports.findOneByUsername = async function (username) {
 
 exports.insert = async function (data) {
   const query = `
-  INSERT INTO ${table} ("username", "email", "password") 
+  INSERT INTO "${table}" ("username", "email", "password") 
   VALUES ($1, $2, $3) RETURNING *
   `
 
@@ -63,7 +63,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, data) {
   const query = `
-  UPDATE ${table} 
+  UPDATE "${table}" 
   SET 
   "username"=COALESCE(NULLIF($2, ''), username), 
   "email"=COALESCE(NULLIF($3, ''), email),
@@ -78,7 +78,7 @@ exports.update = async function (id, data) {
 
 exports.destroy = async function (id) {
   const query = `
-  DELETE FROM ${table} 
+  DELETE FROM "${table}" 
   WHERE "id"=$1
   RETURNING *
   `

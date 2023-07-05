@@ -10,7 +10,7 @@ exports.findAll = async function (page, limit, sort, sortBy) {
 
   const offset = (page - 1) * limit
   const query = `
-  SELECT * FROM ${table} ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+  SELECT * FROM "${table}" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
   `
 
   const values = [limit, offset]
@@ -21,7 +21,7 @@ exports.findAll = async function (page, limit, sort, sortBy) {
 
 exports.findOne = async function (id) {
   const query = `
-  SELECT * FROM ${table} WHERE id=$1
+  SELECT * FROM "${table}" WHERE id=$1
   `
 
   const values = [id]
@@ -31,7 +31,7 @@ exports.findOne = async function (id) {
 
 exports.insert = async function (data) {
   const query = `
-  INSERT INTO ${table} ("eventId", "categoryId") 
+  INSERT INTO "${table}" ("eventId", "categoryId") 
   VALUES ($1, $2) RETURNING *
   `
 
@@ -42,7 +42,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (data) {
   const query = `
-  UPDATE ${table} 
+  UPDATE "${table}" 
   SET "categoryId"=$2
   WHERE "eventId" = $1
   RETURNING *
@@ -55,7 +55,7 @@ exports.update = async function (data) {
 
 exports.destroy = async function (id) {
   const query = `
-  DELETE FROM ${table} 
+  DELETE FROM "${table}" 
   WHERE "id"=$1
   RETURNING *
   `

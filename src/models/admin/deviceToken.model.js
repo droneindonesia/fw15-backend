@@ -10,7 +10,7 @@ exports.findAll = async function (page, limit, sort, sortBy) {
 
   const offset = (page - 1) * limit
   const query = `
-  SELECT * FROM ${table} 
+  SELECT * FROM "${table}" 
   ORDER BY ${sort} ${sortBy} 
   LIMIT $1 OFFSET $2
   `
@@ -23,7 +23,7 @@ exports.findAll = async function (page, limit, sort, sortBy) {
 
 exports.insert = async function (id, data) {
   const query = `
-  INSERT INTO ${table} 
+  INSERT INTO "${table}" 
   ("userId", "token") 
   VALUES ($1, $2) RETURNING *
   `
