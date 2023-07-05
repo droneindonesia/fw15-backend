@@ -3,7 +3,7 @@ const db = require("../../helpers/db.helper")
 exports.insert = async function (id, data) {
     const query = `
     INSERT INTO "devicetoken" 
-    ("token", "userId") 
+    ("userId", "token") 
     VALUES ($1, $2) RETURNING *
     `
 
