@@ -1,6 +1,6 @@
 const multer = require("multer")
 const errorHandler = require("../helpers/errorHandler.helper")
-/* const cloudinary = require("cloudinary").v2
+const cloudinary = require("cloudinary").v2
 const { CloudinaryStorage } = require("multer-storage-cloudinary")
 const path = require("path")
 
@@ -21,19 +21,19 @@ const storage = new CloudinaryStorage({
             return name
         },
     },
-}) */
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/")
-    },
-    filename: (req, file, cb) => {
-        const explode = file.originalname.split(".").length
-        const ext = file.originalname.split(".")[explode - 1]
-        const filename = new Date().getTime().toString() + "." + ext
-        cb(null, filename)
-    },
 })
+
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, "uploads/")
+//     },
+//     filename: (req, file, cb) => {
+//         const explode = file.originalname.split(".").length
+//         const ext = file.originalname.split(".")[explode - 1]
+//         const filename = new Date().getTime().toString() + "." + ext
+//         cb(null, filename)
+//     },
+// })
 
 const limits = {
     fileSize: 1 * 1024 * 1024,
