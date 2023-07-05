@@ -2,6 +2,8 @@ const errorHandler = require("../helpers/errorHandler.helper")
 const eventsModel = require("../models/admin/events.model")
 const eventCategoriesModel = require("../models/admin/eventcategories.model")
 const cloudinary = require("cloudinary").v2
+const admin = require("firebase-admin")
+const deviceTokenModel = require("../models/admin/deviceToken.model")
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -76,6 +78,17 @@ exports.createEvent = async (req, res) => {
         }
 
         await eventCategoriesModel.insert(eventCategories)
+
+        const messaging = admin.messaging()
+        const listToken = await deviceTokenModel.findAll(1, 1000)
+        const message = listToken.map((item) => ({
+            token: item.token,
+            notification: {
+                title: "There is a new event!",
+                body: `${req.body.title} will be held at ${req.body.date}, check it out !`,
+            },
+        }))
+        messaging.sendEach(message)
 
         return res.json({
             success: true,
