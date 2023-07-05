@@ -5,11 +5,11 @@ exports.saveToken = async (req, res) => {
     try {
         const { id } = req.user
         const data = req.body
-        const { data } = await deviceTokenModel.insert(id, data)
+        const dataResults = await deviceTokenModel.insert(id, data)
         return res.json({
             success: true,
             message: "Token saved",
-            results: data,
+            results: dataResults,
         })
     } catch (err) {
         return errorHandler(res, err)
