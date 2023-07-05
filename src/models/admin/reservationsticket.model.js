@@ -1,6 +1,6 @@
 const db = require("../../helpers/db.helper")
 
-const table = "reservationTickets"
+const table = "reservationsTickets"
 
 exports.findAll = async function (page, limit, sort, sortBy) {
   page = parseInt(page) || 1
