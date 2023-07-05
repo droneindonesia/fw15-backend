@@ -1,5 +1,7 @@
 const db = require("../../helpers/db.helper")
 
+const table = "forgotRequest"
+
 exports.findAll = async function (page, limit, search, sort, sortBy) {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
@@ -9,7 +11,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
     const offset = (page - 1) * limit
     const query = `
-    SELECT * FROM "forgotRequest" WHERE "email" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+    SELECT * FROM ${table} WHERE "email" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
     `
 
     const values = [limit, offset, `%${search}%`]
@@ -20,7 +22,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
 exports.findOneByCode = async function (code) {
     const query = `
-    SELECT * FROM "forgotRequest" WHERE "code"=$1
+    SELECT * FROM ${table} WHERE "code"=$1
     `
 
     const values = [code]
@@ -30,7 +32,7 @@ exports.findOneByCode = async function (code) {
 
 exports.findOneByEmail = async function (email) {
     const query = `
-    SELECT * FROM "forgotRequest" WHERE "email"=$1
+    SELECT * FROM ${table} WHERE "email"=$1
     `
 
     const values = [email]
@@ -40,7 +42,7 @@ exports.findOneByEmail = async function (email) {
 
 exports.findOneByCodeAndEmail = async function (email, code) {
     const query = `
-    SELECT * FROM "forgotRequest" WHERE "email"=$1 AND "code"=$2
+    SELECT * FROM ${table} WHERE "email"=$1 AND "code"=$2
     `
 
     const values = [email, code]
@@ -50,7 +52,7 @@ exports.findOneByCodeAndEmail = async function (email, code) {
 
 exports.insert = async function (data) {
     const query = `
-    INSERT INTO "forgotRequest" ("email", "code") 
+    INSERT INTO ${table} ("email", "code") 
     VALUES ($1, $2) RETURNING *
     `
 
@@ -61,7 +63,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, data) {
     const query = `
-    UPDATE "forgotRequest" 
+    UPDATE ${table} 
     SET "email"=$2 "code"=$3
     WHERE "id" = $1
     RETURNING *
@@ -74,7 +76,7 @@ exports.update = async function (id, data) {
 
 exports.destroy = async function (id) {
     const query = `
-    DELETE FROM "forgotRequest" 
+    DELETE FROM ${table} 
     WHERE "id"=$1
     RETURNING *
     `

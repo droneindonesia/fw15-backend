@@ -1,5 +1,7 @@
 const db = require("../../helpers/db.helper")
 
+const table = "reservationTickets"
+
 exports.findAll = async function (page, limit, sort, sortBy) {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
@@ -8,7 +10,7 @@ exports.findAll = async function (page, limit, sort, sortBy) {
 
     const offset = (page - 1) * limit
     const query = `
-    SELECT * FROM "reservationsTickets" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+    SELECT * FROM ${table} ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
     `
 
     const values = [limit, offset]
@@ -26,7 +28,7 @@ exports.getInfo = async (id) => {
     "rt"."quantity" AS "Quantity",
     "rsta"."name" AS "Status",
     "pm"."name" AS "Payment Method"
-    FROM "reservationsTickets" "rt"
+    FROM ${table} "rt"
     INNER JOIN "reservationSections" "rs" ON "rs"."id" = "rt"."sectionId"
     INNER JOIN "reservations" "r" ON "r"."id" = "rt"."reservationId"
     INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
@@ -41,7 +43,7 @@ exports.getInfo = async (id) => {
 
 exports.findOne = async function (id) {
     const query = `
-    SELECT * FROM "reservationsTickets" WHERE id=$1
+    SELECT * FROM ${table} WHERE id=$1
     `
 
     const values = [id]
@@ -51,7 +53,7 @@ exports.findOne = async function (id) {
 
 exports.insert = async function (data) {
     const query = `
-    INSERT INTO "reservationsTickets" ("reservationId", "sectionId", "quantity") 
+    INSERT INTO ${table} ("reservationId", "sectionId", "quantity") 
     VALUES ($1, $2, $3) RETURNING *
     `
 
@@ -62,7 +64,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, data) {
     const query = `
-    UPDATE "reservationsTickets" 
+    UPDATE ${table} 
     SET "reservationId"=$2, "sectionId"=$3, "quantity"=$4
     WHERE "id" = $1
     RETURNING *
@@ -75,7 +77,7 @@ exports.update = async function (id, data) {
 
 exports.destroy = async function (id) {
     const query = `
-    DELETE FROM "reservationsTickets" 
+    DELETE FROM ${table} 
     WHERE "id"=$1
     RETURNING *
     `

@@ -1,5 +1,7 @@
 const db = require("../../helpers/db.helper")
 
+const table = "paymentMethod"
+
 exports.findAll = async function (page, limit, search, sort, sortBy) {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
@@ -9,7 +11,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
     const offset = (page - 1) * limit
     const query = `
-    SELECT * FROM "paymentMethod" WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+    SELECT * FROM ${table} WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
     `
 
     const values = [limit, offset, `%${search}%`]
@@ -20,7 +22,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
 exports.findOne = async function (id) {
     const query = `
-    SELECT * FROM "paymentMethod" WHERE id=$1
+    SELECT * FROM ${table} WHERE id=$1
     `
 
     const values = [id]
@@ -30,7 +32,7 @@ exports.findOne = async function (id) {
 
 exports.findAllPayment = async function () {
     const query = `
-    SELECT * FROM "paymentMethod"
+    SELECT * FROM ${table}
     `
 
     const values = []
@@ -40,7 +42,7 @@ exports.findAllPayment = async function () {
 
 exports.insert = async function (data) {
     const query = `
-    INSERT INTO "paymentMethod" ("name") 
+    INSERT INTO ${table} ("name") 
     VALUES ($1) RETURNING *
     `
 
@@ -51,7 +53,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, data) {
     const query = `
-    UPDATE "paymentMethod" 
+    UPDATE ${table} 
     SET "name"=$2
     WHERE "id" = $1
     RETURNING *
@@ -64,7 +66,7 @@ exports.update = async function (id, data) {
 
 exports.destroy = async function (id) {
     const query = `
-    DELETE FROM "paymentMethod" 
+    DELETE FROM ${table} 
     WHERE "id"=$1
     RETURNING *
     `

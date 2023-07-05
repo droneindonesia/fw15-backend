@@ -1,5 +1,7 @@
 const db = require("../../helpers/db.helper")
 
+const table = "events"
+
 exports.findAll = async function (
     page,
     limit,
@@ -118,7 +120,7 @@ exports.findOne = async function (id) {
 
 exports.insert = async function (data) {
     const query = `
-    INSERT INTO "events" ("picture", "title", "date", "cityId", "description", "createdBy") 
+    INSERT INTO ${table} ("picture", "title", "date", "cityId", "description", "createdBy") 
     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
     `
 
@@ -136,7 +138,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, userId, data) {
     const query = `
-    UPDATE "events" 
+    UPDATE ${table} 
     SET "picture"=$2, "title"=$3, "date"=$4, "cityId"=$5, "description"=$6, "createdBy"=$7
     WHERE "id" = $1
     RETURNING *
@@ -157,7 +159,7 @@ exports.update = async function (id, userId, data) {
 
 exports.destroy = async function (id) {
     const query = `
-    DELETE FROM "events" 
+    DELETE FROM ${table} 
     WHERE "id"=$1
     RETURNING *
     `

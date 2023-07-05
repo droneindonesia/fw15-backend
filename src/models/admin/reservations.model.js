@@ -1,5 +1,7 @@
 const db = require("../../helpers/db.helper")
 
+const table = "reservations"
+
 exports.findAll = async function (page, limit, sort, sortBy) {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
@@ -8,7 +10,7 @@ exports.findAll = async function (page, limit, sort, sortBy) {
 
     const offset = (page - 1) * limit
     const query = `
-    SELECT * FROM "reservations" ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+    SELECT * FROM ${table} ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
     `
 
     const values = [limit, offset]
@@ -28,7 +30,7 @@ exports.getReservations = async function () {
 
 exports.findOne = async function (id) {
     const query = `
-    SELECT * FROM "reservations" WHERE "userId"=$1
+    SELECT * FROM ${table} WHERE "userId"=$1
     `
 
     const values = [id]
@@ -43,7 +45,7 @@ exports.findOneByUserId = async (userId) => {
     "e"."title",
     "c"."name",
     "e"."date"
-    FROM "reservations" "r"
+    FROM ${table} "r"
     INNER JOIN "events" "e" ON "e"."id" = "r"."eventId"
     INNER JOIN "cities" "c" ON "c"."id" = "e"."cityId"
     WHERE "r"."userId" = $1
@@ -55,7 +57,7 @@ exports.findOneByUserId = async (userId) => {
 
 exports.findByIdAndUserId = async (userId) => {
     const queries = `
-    SELECT * FROM "reservations"
+    SELECT * FROM ${table}
     WHERE "userId" = $1
     `
     const values = [userId]
@@ -65,7 +67,7 @@ exports.findByIdAndUserId = async (userId) => {
 
 exports.insert = async function (data) {
     const query = `
-    INSERT INTO "reservations" ("eventId", "userId", "statusId", "paymentMethodId") 
+    INSERT INTO ${table} ("eventId", "userId", "statusId", "paymentMethodId") 
     VALUES ($1, $2, $3, $4) RETURNING *
     `
 
@@ -81,7 +83,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, data) {
     const query = `
-    UPDATE "reservations" 
+    UPDATE ${table} 
     SET "eventId"=$2, "userId"=$3 "statusId"=$4, "paymentMethodId"=$5
     WHERE "id" = $1
     RETURNING *
@@ -100,7 +102,7 @@ exports.update = async function (id, data) {
 
 exports.updateByUserId = async (userId, data) => {
     const query = `
-    UPDATE "reservations" 
+    UPDATE ${table} 
     SET 
     "statusId"=$2,
     "paymentMethodId"=$3
@@ -114,7 +116,7 @@ exports.updateByUserId = async (userId, data) => {
 
 exports.destroy = async function (id) {
     const query = `
-    DELETE FROM "reservations" 
+    DELETE FROM ${table} 
     WHERE "id"=$1
     RETURNING *
     `

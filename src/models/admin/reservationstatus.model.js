@@ -1,5 +1,7 @@
 const db = require("../../helpers/db.helper")
 
+const table = "reservationStatus"
+
 exports.findAll = async function (page, limit, search, sort, sortBy) {
     page = parseInt(page) || 1
     limit = parseInt(limit) || 5
@@ -9,7 +11,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
     const offset = (page - 1) * limit
     const query = `
-    SELECT * FROM "reservationStatus" WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
+    SELECT * FROM ${table} WHERE "name" LIKE $3 ORDER BY ${sort} ${sortBy} LIMIT $1 OFFSET $2
     `
 
     const values = [limit, offset, `%${search}%`]
@@ -20,7 +22,7 @@ exports.findAll = async function (page, limit, search, sort, sortBy) {
 
 exports.findOne = async function (id) {
     const query = `
-    SELECT * FROM "reservationStatus" WHERE id=$1
+    SELECT * FROM ${table} WHERE id=$1
     `
 
     const values = [id]
@@ -30,7 +32,7 @@ exports.findOne = async function (id) {
 
 exports.insert = async function (data) {
     const query = `
-    INSERT INTO "reservationStatus" ("name") 
+    INSERT INTO ${table} ("name") 
     VALUES ($1) RETURNING *
     `
 
@@ -41,7 +43,7 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, data) {
     const query = `
-    UPDATE "reservationStatus" 
+    UPDATE ${table} 
     SET "name"=$2
     WHERE "id" = $1
     RETURNING *
@@ -54,7 +56,7 @@ exports.update = async function (id, data) {
 
 exports.destroy = async function (id) {
     const query = `
-    DELETE FROM "reservationStatus" 
+    DELETE FROM ${table} 
     WHERE "id"=$1
     RETURNING *
     `
