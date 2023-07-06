@@ -4,6 +4,7 @@ const eventCategoriesModel = require("../models/admin/eventcategories.model")
 const cloudinary = require("cloudinary").v2
 const admin = require("../helpers/firebase")
 const deviceTokenModel = require("../models/admin/deviceToken.model")
+const notificationModel = require("../models/admin/notification.model")
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -89,6 +90,13 @@ exports.createEvent = async (req, res) => {
       },
     }))
     messaging.sendEach(message)
+
+    const notifData = {
+      title: "There is a new event !",
+      body: `${req.body.title} will be held at ${req.body.date}, check it out !`,
+    }
+
+    await notificationModel.insert(notifData)
 
     return res.json({
       success: true,
