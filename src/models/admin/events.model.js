@@ -101,8 +101,14 @@ exports.insert = async function (data) {
 
 exports.update = async function (id, userId, data) {
   const query = `
-  UPDATE "${table}" 
-  SET "picture"=$2, "title"=$3, "date"=$4, "cityId"=$5, "description"=$6, "createdBy"=$7
+  UPDATE "${table}"
+  SET
+  "picture"=COALESCE(NULLIF($2, ''), "picture"),
+  "title"=COALESCE(NULLIF($3, ''), "title"),
+  "date"=COALESCE(NULLIF($4::DATE, NULL), "date"),
+  "cityId"=COALESCE(NULLIF($5::INTEGER, NULL), "cityId"),
+  "description"=COALESCE(NULLIF($6, ''), "description"),
+  "createdBy"=COALESCE(NULLIF($7::INTEGER, NULL), "createdBy")
   WHERE "id" = $1
   RETURNING *
   `
