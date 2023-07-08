@@ -2,7 +2,7 @@ const errorHandler = require("../helpers/errorHandler.helper")
 const eventsModel = require("../models/admin/events.model")
 const eventCategoriesModel = require("../models/admin/eventcategories.model")
 const cloudinary = require("cloudinary").v2
-const admin = require("../helpers/firebase")
+// const admin = require("../helpers/firebase")
 const deviceTokenModel = require("../models/admin/deviceToken.model")
 const notificationModel = require("../models/admin/notification.model")
 
