@@ -1,57 +1,68 @@
-const multer = require("multer")
-const errorHandler = require("../helpers/errorHandler.helper")
-const cloudinary = require("cloudinary").v2
-const { CloudinaryStorage } = require("multer-storage-cloudinary")
-const path = require("path")
+const multer = require("multer");
+const errorHandler = require("../helpers/errorHandler.helper");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-})
+  cloud_name: "dxs0yxeyr",
+  api_key: "236157336681252",
+  api_secret: "V2uHsegpJtBpFlUl3WSwkxdCL0I",
+});
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'ItmamulFahmi',
-    format: async (req, file) => "png", // supports promises as well
+    folder: "ItmamulFahmi",
+    format: async (req, file) => "png",
     public_id: (req, file) => {
-      const filename = new Date().getTime().toString()
-      return filename
-    }
-  }
-})
+      const filename = new Date().getTime().toString();
+      return filename;
+    },
+  },
+});
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads/");
+//   },
+//   filename: (req, file, cb) => {
+//     const explode = file.originalname.split(".").length;
+//     const ext = file.originalname.split(".")[explode - 1];
+//     const filename = new Date().getTime().toString() + "." + ext;
+//     cb(null, filename);
+//   },
+// });
 
 const limits = {
-  fileSize: 1 * 2048 * 4096,
-}
+  fileSize: 1 * 1024 * 1024,
+};
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png" && file.mimetype !== "image/svg+xml") {
-    cb(Error("fileformat_error"))
+  if (file.mimetype !== "image/jpeg" && file.mimetype !== "image/png") {
+    cb(Error("fileformat_error"));
   }
-  cb(null, true)
-}
+  cb(null, true);
+};
 
-const upload = multer({ storage, limits, fileFilter })
+const upload = multer({ storage, limits, fileFilter });
 
 const uploadMiddleware = (field) => {
-  const uploadField = upload.single(field)
+  const uploadField = upload.single(field);
   return (req, res, next) => {
     uploadField(req, res, (err) => {
       try {
         if (err) {
           if (err.message === "fileformat_error") {
-            throw Error("fileformat_error")
+            throw Error("fileformat_error");
           }
-          throw Error(err.message)
+          throw Error(err.message);
         }
-        return next()
+        return next();
       } catch (err) {
-        return errorHandler(res, err)
+        return errorHandler(res, err);
       }
-    })
-  }
-}
+    });
+  };
+};
 
-module.exports = uploadMiddleware
+module.exports = uploadMiddleware;
