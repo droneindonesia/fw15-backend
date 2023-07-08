@@ -13,9 +13,10 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   folder: 'uploads',
-  public_id: (req, file) => 'computed-filename-using-request',
-  filename: (req, file) => {
-    return Date.now() + '-' + file.originalname;
+  format: async (req, file) => "png", // supports promises as well
+  public_id: (req, file) => {
+    const filename = new Date().getTime().toString()
+    return filename
   }
 })
 
