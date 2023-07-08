@@ -12,15 +12,10 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: {
-    folder: "uploads",
-    format: async (req, file) => path.extname(file.originalname).slice("1"),
-    public_id: () => {
-      const randomNumber = Math.round(Math.random() * 5000)
-      const name = `${new Date().getDate()}_${randomNumber}`
-      return name
-    },
-  },
+  folder: 'uploads',
+  filename: (req, file) => {
+    return Date.now() + '-' + file.originalname;
+  }
 })
 
 const limits = {
