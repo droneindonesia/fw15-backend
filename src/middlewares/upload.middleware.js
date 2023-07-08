@@ -13,6 +13,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   folder: 'uploads',
+  public_id: (req, file) => 'computed-filename-using-request',
   filename: (req, file) => {
     return Date.now() + '-' + file.originalname;
   }
