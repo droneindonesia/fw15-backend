@@ -23,18 +23,6 @@ const storage = new CloudinaryStorage({
   },
 })
 
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, "uploads/")
-//     },
-//     filename: (req, file, cb) => {
-//         const explode = file.originalname.split(".").length
-//         const ext = file.originalname.split(".")[explode - 1]
-//         const filename = new Date().getTime().toString() + "." + ext
-//         cb(null, filename)
-//     },
-// })
-
 const limits = {
   fileSize: 1 * 2048 * 4096,
 }
