@@ -80,23 +80,23 @@ exports.createEvent = async (req, res) => {
 
     await eventCategoriesModel.insert(eventCategories)
 
-    const messaging = admin.messaging()
-    const listToken = await deviceTokenModel.findAll(1, 1000)
-    const message = listToken.map((item) => ({
-      token: item.token,
-      notification: {
-        title: "There is a new event!",
-        body: `${req.body.title} will be held at ${req.body.date}, check it out !`,
-      },
-    }))
-    messaging.sendEach(message)
+    // const messaging = admin.messaging()
+    // const listToken = await deviceTokenModel.findAll(1, 1000)
+    // const message = listToken.map((item) => ({
+    //   token: item.token,
+    //   notification: {
+    //     title: "There is a new event!",
+    //     body: `${req.body.title} will be held at ${req.body.date}, check it out !`,
+    //   },
+    // }))
+    // messaging.sendEach(message)
 
-    const notifData = {
-      title: "There is a new event !",
-      body: `${req.body.title} will be held at ${req.body.date}, check it out !`,
-    }
+    // const notifData = {
+    //   title: "There is a new event !",
+    //   body: `${req.body.title} will be held at ${req.body.date}, check it out !`,
+    // }
 
-    await notificationModel.insert(notifData)
+    // await notificationModel.insert(notifData)
 
     return res.json({
       success: true,
